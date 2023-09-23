@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     college:String,
     date:String,
     handle:Number,
+    on:Number,
 })
 
 const Mentor = mongoose.model('mentorData',userSchema);

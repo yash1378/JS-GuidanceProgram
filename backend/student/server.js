@@ -19,7 +19,7 @@ app.use(express.json());
 app.get('/api/data', async (req, res) => {
   try {
     const conditions = req.query; // Query parameters for conditions
-    console.log(req.query);
+    // console.log(req.query);
     
     // Find data in the User model based on query parameters
     const data = await User.find(conditions);
@@ -33,7 +33,7 @@ app.get('/api/data', async (req, res) => {
 
 
 app.post('/', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   if (!req.body.name || !req.body.phone) {
       return res.status(422).json({ error: "Please fill the fields properly" });
   }
@@ -50,6 +50,7 @@ app.post('/', async (req, res) => {
       date: req.body.date,
       class: req.body.class, // Add the class field if it's available in the request
       sub: req.body.sub, // Add the sub field if it's available in the request
+      mentor:"",
   };
 
   const user = new User(userData);
@@ -81,7 +82,7 @@ app.get('/api/mentorData', async (req, res) => {
 });
 
 app.post('/mentorData', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   if (!req.body.name || !req.body.phone) {
       return res.status(422).json({ error: "Please fill the fields properly" });
   }
@@ -97,6 +98,7 @@ app.post('/mentorData', async (req, res) => {
       college: req.body.college, // Add the email field if it's available in the request
       date: req.body.date,
       handle:0,
+      on:0,
       // Add the sub field if it's available in the request
   };
 
@@ -116,7 +118,7 @@ app.post('/mentorData', async (req, res) => {
 
 app.post('/api/update', async (req, res) => {
   const { mentorName, studentCount } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     // Find the mentor by name in your data (replace this with your database query)
@@ -139,6 +141,41 @@ app.post('/api/update', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+app.post('/api/finalMentor', async (req, res) => {
+  try {
+    const { mentorName, studentIds } = req.body;
+    // console.log(req.body);
+    // console.log(mentorName);
+    // console.log(studentIds);
+
+    // Update students in the user table
+    await User.updateMany(
+      { _id: { $in: studentIds } },
+      { $set: { mentor: mentorName } }
+    );
+
+    // Get the count of selected students
+    const selectedStudentCount = studentIds.length;
+
+    // Update the 'on' field for the mentor in the mentor table
+    const mentorToUpdate = await Mentor.findOne({ name: mentorName });
+    if (!mentorToUpdate) {
+      return res.status(404).json({ error: 'Mentor not found' });
+    }
+
+    mentorToUpdate.on += selectedStudentCount;
+    await mentorToUpdate.save();
+
+    res.json({ message: 'Mentor and students updated successfully' });
+  } catch (error) {
+    console.error('An error occurred while updating data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
 
 

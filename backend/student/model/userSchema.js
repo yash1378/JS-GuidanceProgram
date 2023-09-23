@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     date:String,
     class:String,
     sub:String,
+    mentor:String,
 })
 
 const User = mongoose.model('studentData',userSchema);
