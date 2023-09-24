@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     date:String,
     handle:Number,
     on:Number,
+    total:Number,
 })
 
 const Mentor = mongoose.model('mentordatas',userSchema);

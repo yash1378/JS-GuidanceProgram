@@ -100,6 +100,7 @@ app.post('/mentorData', async (req, res) => {
       date: req.body.date,
       handle:0,
       on:0,
+      total:0,
       // Add the sub field if it's available in the request
   };
 
@@ -167,6 +168,7 @@ app.post('/api/finalMentor', async (req, res) => {
     }
 
     mentorToUpdate.on += selectedStudentCount;
+    mentorToUpdate.total+=selectedStudentCount;
     await mentorToUpdate.save();
 
     res.json({ message: 'Mentor and students updated successfully' });
