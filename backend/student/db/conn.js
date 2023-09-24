@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const DB = 'mongodb+srv://yashd:webdev%401234@nodeexpressproject.qp0arwg.mongodb.net/JS?retryWrites=true&w=majority';
+require('dotenv').config()
+const DB = `mongodb+srv://${process.env.Database_Username}:${process.env.Database_Password}@nodeexpressproject.qp0arwg.mongodb.net/${process.env.Student_Database_Name}?retryWrites=true&w=majority`;
 
 mongoose.connect(DB).then(() => {
   console.log("Connection successful...");
