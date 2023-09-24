@@ -70,7 +70,7 @@ app.post('/', async (req, res) => {
 app.get('/api/mentorData', async (req, res) => {
   try {
     const conditions = req.query; // Query parameters for conditions
-    console.log(req.query);
+    // console.log(req.query);
     
     // Find data in the User model based on query parameters
     const data = await Mentor.find(conditions);

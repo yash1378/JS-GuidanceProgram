@@ -10,6 +10,6 @@ const userSchema = new mongoose.Schema({
     mentor:String,
 })
 
-const User = mongoose.model('studentData',userSchema);
+const User = mongoose.model('studentdatas',userSchema);
 
 module.exports = User;

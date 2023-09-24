@@ -9,6 +9,6 @@ const userSchema = new mongoose.Schema({
     on:Number,
 })
 
-const Mentor = mongoose.model('mentorData',userSchema);
+const Mentor = mongoose.model('mentordatas',userSchema);
 
 module.exports = Mentor;
