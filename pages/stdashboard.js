@@ -6,9 +6,8 @@ function DataPage({ data }) {
   const [totalStudents, setTotalStudents] = useState(0);
   const [activeStudents, setActiveStudents] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to control sidebar visibility
-  const [filterConditions,setFilterConditions] = useState("");
   const [final,setFinal]=useState([]);
-  const [date,setData]=useState("");
+
 
 
   const router = useRouter();
@@ -43,6 +42,8 @@ function DataPage({ data }) {
     console.log(filteredData)
     setFinal(filteredData);
 
+    console.log("Effect Triggered");
+
 
     // Calculate the total number of students
     setTotalStudents(filteredData.length);
@@ -58,7 +59,7 @@ function DataPage({ data }) {
     }).length;
 
     setActiveStudents(activeStudentCount);
-  }, [data]); // Add router.query to the dependency array
+  }, [router.query]); // Add router.query to the dependency array
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -72,7 +73,7 @@ function DataPage({ data }) {
 
   return (
     <>
-    <div className="w-20  bg-zinc-800 z-100 absolute" style={{height:'100vh'}}>
+    <div className="w-20  bg-zinc-800 z-100 absolute" style={{height:'100%'}}>
     <FaBars  style={{color:'white',height:'45px',width:'45px',position:'absolute',left:'13px',top:'13px',cursor:'pointer'}} onClick={toggleSidebar}/>
     </div>
 

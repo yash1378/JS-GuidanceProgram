@@ -1,0 +1,54 @@
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .main {
+    padding: 5rem 0;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    /* height: 50vh; */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .button {
+    margin: 1rem;
+    padding: 1rem 2rem;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: #0070f3;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #0052cc;
+  }
+  
+  .footer {
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    bottom: 0;
+  }
+  
+  

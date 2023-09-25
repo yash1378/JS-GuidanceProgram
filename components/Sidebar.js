@@ -74,7 +74,7 @@ function Sidebar({ isOpen, closeSidebar }) {
     };
 
     fetchMentorData();
-  }, [mentorData]);
+  }, []);
 
   return (
     <div
