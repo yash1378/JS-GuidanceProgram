@@ -148,9 +148,9 @@ app.post('/api/update', async (req, res) => {
 app.post('/api/finalMentor', async (req, res) => {
   try {
     const { mentorName, studentIds } = req.body;
-    // console.log(req.body);
-    // console.log(mentorName);
-    // console.log(studentIds);
+    console.log(req.body);
+    console.log(mentorName);
+    console.log(studentIds);
 
     // Update students in the user table
     await User.updateMany(
