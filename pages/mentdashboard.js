@@ -52,7 +52,7 @@ function DataPage({ data }) {
 export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
-    const response = await fetch("http://localhost:4000/api/mentorData/");
+    const response = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData/");
     const data = await response.json();
 
     return {

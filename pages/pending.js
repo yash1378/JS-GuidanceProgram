@@ -40,10 +40,10 @@ export default ParentComponent;
 export async function getServerSideProps() {
   try {
     // Fetch data from your API routes (backend)
-    const response1 = await fetch("http://localhost:4000/api/data"); // Replace with your API URL
+    const response1 = await fetch("https://gp-backend-u5ty.onrender.com/api/data"); // Replace with your API URL
     const data = await response1.json();
 
-    const response2 = await fetch("http://localhost:4000/api/mentordata"); // Replace with your other API URL
+    const response2 = await fetch("https://gp-backend-u5ty.onrender.com/api/mentordata"); // Replace with your other API URL
     const additionalData = await response2.json();
 
     return {

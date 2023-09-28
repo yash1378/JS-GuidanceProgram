@@ -17,7 +17,7 @@ function Registration() {
   const fetchMentors = async () => {
     try {
       // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint to fetch mentors
-      const response = await fetch("http://localhost:4000/api/mentorData");
+      const response = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData");
       if (response.ok) {
         // console.log(response.json());
         const data = await response.json();
@@ -45,7 +45,7 @@ function Registration() {
     
         // Send data to the backend API using fetch
         try {
-          const response = await fetch("http://localhost:4000/api/update", {
+          const response = await fetch("https://gp-backend-u5ty.onrender.com/api/update", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

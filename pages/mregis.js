@@ -37,7 +37,7 @@ function MentorInputForm() {
       date: dateOfJoining,
     };
     try {
-      const response = await fetch("http://localhost:4000/mentorData", {
+      const response = await fetch("https://gp-backend-u5ty.onrender.com/mentorData", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
