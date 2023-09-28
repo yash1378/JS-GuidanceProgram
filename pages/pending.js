@@ -3,26 +3,32 @@ import DataPage from "@/components/DataPage";
 
 function ParentComponent({data,additionalData}) {
 
-  const [d, setD] = useState([]);
-  const [ad,setAD] = useState([])
+  const [studentsWithoutMentor, setStudentsWithoutMentor] = useState([]);
 
-  // Function to update the data state
+  useEffect(() => {
+    // Filter students without mentors
+    const studentsWithoutMentors = data.filter((student) => !student.mentor);
+    setStudentsWithoutMentor(studentsWithoutMentors);
+  }, [data]);
+
+  // Function to update data and remove assigned students
   const updateData = (newData) => {
-    setD(newData);
+    // Update the data array with the new data
+    // This will trigger a re-render of DataPage with the updated data
+    data = newData;
+
+    // Filter students without mentors
+    const studentsWithoutMentors = data.filter((student) => !student.mentor);
+    setStudentsWithoutMentor(studentsWithoutMentors);
   };
 
-  // Function to update the additionalData state
-  const updateAdditionalData = (newAdditionalData) => {
-    setAD(newAdditionalData);
-  };
 
 
   return (
     <DataPage
-      data={data} // Pass the data state
-      updateData={updateData} // Pass the updateData function
-      additionalData={additionalData} // Pass the additionalData state
-      updateAdditionalData={updateAdditionalData} // Pass the updateAdditionalData function
+    data={studentsWithoutMentor} // Pass the filtered data without mentors
+    updateData={updateData}
+    additionalData={additionalData}
     />
   );
 }
