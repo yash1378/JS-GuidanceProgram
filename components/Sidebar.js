@@ -25,25 +25,25 @@ function Sidebar({ isOpen, closeSidebar }) {
 
   const changeurl = ()=>{
     if(selectedMentor && !date && !enrol){
-        router.replace(`https://js-guidance-program.vercel.app/stdashboard?mentorName=${selectedMentor}`)
+        router.push(`?mentorName=${selectedMentor}`)
     }
     else if(selectedMentor && !date && enrol){
-        router.replace(`https://js-guidance-program.vercel.app/stdashboard?mentorName=${selectedMentor}&enrolled=${enrol}`)
+        router.push(`?mentorName=${selectedMentor}&enrolled=${enrol}`)
     }
     else if(selectedMentor && date && !enrol){
-        router.replace(`https://js-guidance-program.vercel.app/stdashboard?mentorName=${selectedMentor}&enddate=${date}`)
+        router.push(`?mentorName=${selectedMentor}&enddate=${date}`)
     }
     else if(selectedMentor && date && enrol){
-        router.replace(`https://js-guidance-program.vercel.app/stdashboard?mentorName=${selectedMentor}&enddate=${date}&enrolled=${enrol}`)
+        router.push(`?mentorName=${selectedMentor}&enddate=${date}&enrolled=${enrol}`)
     }
     else if(!selectedMentor && date && !enrol){
-        router.replace(`https://js-guidance-program.vercel.app/stdashboard?enddate=${date}`)
+        router.push(`?enddate=${date}`)
     }
     else if(!selectedMentor && date && enrol){
-        router.replace(`https://js-guidance-program.vercel.app/stdashboard?enddate=${date}&enrolled=${enrol}`)
+        router.push(`?enddate=${date}&enrolled=${enrol}`)
     }
     else if(!selectedMentor && !date && enrol){
-        router.replace(`https://js-guidance-program.vercel.app/stdashboard?enrolled=${enrol}`)
+        router.push(`?enrolled=${enrol}`)
     }
 
     setEnrol(false);
