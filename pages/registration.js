@@ -55,7 +55,7 @@ function Registration() {
       sub: subscriptionType,
     };
     try {
-      const response = await fetch("http://localhost:4000/", {
+      const response = await fetch("https://gp-backend-u5ty.onrender.com/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
