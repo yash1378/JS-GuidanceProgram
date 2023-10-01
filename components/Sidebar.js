@@ -45,7 +45,11 @@ function Sidebar({ isOpen, closeSidebar }) {
     else if(!selectedMentor && !date && enrol){
         router.push(`?enrolled=${enrol}`)
     }
+    setEnrol(false);
+  }
 
+  const removefilter = () =>{
+    router.push('/stdashboard/');
     setEnrol(false);
 
   }
@@ -176,6 +180,13 @@ function Sidebar({ isOpen, closeSidebar }) {
     
       >
         Apply Filters
+      </button>
+      <button
+        className="ml-0 mt-2 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-60"
+        onClick={removefilter}
+    
+      >
+        Remove Filters
       </button>
     </div>
   );
