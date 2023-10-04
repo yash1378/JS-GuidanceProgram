@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
-import Cookies from "js-cookie"; 
+import Cookies from "js-cookie"; // Import the Cookies library
 function DataPage({ data,d }) {
+
+  const router = useRouter();
+  const ment = router.query.mentor;
   const [isAuthorized, setIsAuthorized] = useState(true);
-  let final =data;
+
+  let final = [];
+  console.log("ment -> "+ment);
+  let it = d.filter((item)=> item.name === ment);
+  console.log(it);
+  final = data.filter((item) => item.mentor === ment);
+  console.log(d)
 
 
 
   useEffect(() => {
     const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
-    // let isMatch ;
-    // console.log(isMatch);
-    let isMatch = d.filter((it)=>usernameCookie === it._id);
+    const isMatch = usernameCookie === it[0]._id;
     setIsAuthorized(isMatch);
-    if(isMatch.length === 0){
-      setIsAuthorized(false);
-    }
-
-  }, [final]);
+  }, [ment]);
 
   if (!isAuthorized) {
     // If the username in the cookie doesn't match the mentor name, you can redirect the user
@@ -38,14 +42,19 @@ function DataPage({ data,d }) {
     </div>
     ) // Return null to prevent rendering this component
   }
- 
+
+
+
 
   return (
     <>
 
+
+
+      {/* Page Content */}
       <div className="flex-1">
         <h1 className="text-2xl font-semibold mb-4 relative ml-40 mt-5">
-          Mentor Data Dashboard
+          Data Table
         </h1>
         <div
           className="container mx-auto mt-10 overflow-y-auto"
@@ -59,29 +68,36 @@ function DataPage({ data,d }) {
             <thead className="bg-gray-900 text-white">
               <tr>
                 <th className="border border-gray-300 p-2">No.</th>
+                <th className="border border-gray-300 p-2">Student Name</th>
+                <th className="border border-gray-300 p-2">Enrollment Date</th>
+                <th className="border border-gray-300 p-2">Mobile.No</th>
                 <th className="border border-gray-300 p-2">Mentor Name</th>
-                <th className="border border-gray-300 p-2">Total Students Guided</th>
-                <th className="border border-gray-300 p-2">No.of Ongoing Students</th>
-                <th className="border border-gray-300 p-2">Current Availability</th>
+                <th className="border border-gray-300 p-2">Sub Type</th>
+                <th className="border border-gray-300 p-2">Class</th>
+                <th className="border border-gray-300 p-2">Email</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {final.map((item, index) => (
                 <tr
                   key={item._id}
                   className={index % 2 === 0 ? "bg-gray-200" : "bg-gray-400"}
                 >
                   <td className="border border-gray-300 p-2">{index + 1}</td>
                   <td className="border border-gray-300 p-2">{item.name}</td>
-                  <td className="border border-gray-300 p-2">{item.total}</td>
-                  <td className="border border-gray-300 p-2">{item.on}</td>
-                  <td className="border border-gray-300 p-2">{item.handle-item.on}</td>
+                  <td className="border border-gray-300 p-2">{item.date}</td>
+                  <td className="border border-gray-300 p-2">{item.phone}</td>
+                  <td className="border border-gray-300 p-2">{item.mentor}</td>
+                  <td className="border border-gray-300 p-2">{item.sub}</td>
+                  <td className="border border-gray-300 p-2">{item.class}</td>
+                  <td className="border border-gray-300 p-2">{item.email}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        </div>
+      </div>
+      {/* </div> */}
     </>
   );
 }
@@ -89,10 +105,10 @@ function DataPage({ data,d }) {
 export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
-    const response = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData/");
+    const response = await fetch("https://gp-backend-u5ty.onrender.com/api/data/");
     const data = await response.json();
-    const r = await fetch("https://gp-backend-u5ty.onrender.com/api/ownerData/");
-    const d = await response.json();
+    const r  =  await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData/");
+    const d = await r.json();
 
     return {
       props: {

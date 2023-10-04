@@ -69,7 +69,7 @@ function Sidebar({ isOpen, closeSidebar }) {
     // Fetch mentor data from the server when the component mounts
     const fetchMentorData = async () => {
       try {
-        const response = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData");
+        const response = await fetch("http://localhost:4000/api/mentorData");
         const data = await response.json();
         setMentorData(data);
       } catch (error) {

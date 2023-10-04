@@ -12,7 +12,7 @@ echo "Installing frontend dependencies..."
 echo "Starting the backend server..."
 nodemon server.js &
 
-sleep 5
+sleep 10
 cd C:/Users/HP/Desktop/gprogram # Replace with the actual path to your frontend directory
 npm install
 

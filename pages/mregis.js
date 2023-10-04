@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Toast from "@/components/Toast";
+import Head from "next/head";
+import Cookies from "js-cookie"; 
 
 function MentorInputForm() {
   const [mentorName, setMentorName] = useState("");
