@@ -8,6 +8,8 @@ function MentorInputForm() {
   const [mentorPhoneNumber, setMentorPhoneNumber] = useState("");
   const [mentorCollegeName, setMentorCollegeName] = useState("");
   const [dateOfJoining, setDateOfJoining] = useState("");
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
   const [showToast, setShowToast] = useState(false);
@@ -28,15 +30,14 @@ function MentorInputForm() {
       mentorCollegeName,
       dateOfJoining,
     });
-    setMentorName("");
-    setMentorPhoneNumber("");
-    setMentorCollegeName("");
-    setDateOfJoining("");
+
     const formData = {
       name: mentorName,
       phone: mentorPhoneNumber,
       college: mentorCollegeName,
       date: dateOfJoining,
+      email:email,
+      password:password,
     };
     try {
       const response = await fetch("https://gp-backend-u5ty.onrender.com/mentorData", {
@@ -46,6 +47,12 @@ function MentorInputForm() {
         },
         body: JSON.stringify(formData),
       });
+      // setMentorName("");
+      // setMentorPhoneNumber("");
+      // setMentorCollegeName("");
+      // setDateOfJoining("");
+      // setEmail("");
+      // setPassword("");
 
       if (response.ok) {
         console.log("Form data submitted successfully!");
@@ -53,6 +60,7 @@ function MentorInputForm() {
         setColor("green");
         toast();
       } else {
+        console.log(response)
         console.error("Failed to submit form data.");
         setMessage("Failed to submit for Data");
         setColor("red");
@@ -69,7 +77,7 @@ function MentorInputForm() {
   return (
     <>
       <div
-        className="mx-auto mt-8 p-4 rounded-lg bg-white dark:bg-gray-800"
+        className="mx-auto mt-4 p-4 rounded-lg bg-white dark:bg-gray-800"
         style={{ maxWidth: "60vw", boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)" }}
       >
         <form>
@@ -108,6 +116,45 @@ function MentorInputForm() {
               placeholder="Enter Mentor's Phone Number"
               value={mentorPhoneNumber}
               onChange={(e) => setMentorPhoneNumber(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Email
+            </label>
+            <input
+              type="text"
+              id="email"
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+                email ? "has-value" : ""
+              }`}
+              placeholder="Enter Mentor's Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+                password ? "has-value" : ""
+              }`}
+              placeholder="Enter Mentor's Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>

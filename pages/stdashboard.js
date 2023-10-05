@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Cookies from "js-cookie"; 
+import Cookies from "js-cookie";
 import { FaBars } from "react-icons/fa"; // Import the hamburger icon
-function DataPage({ data,d }) {
+function DataPage({ data, d }) {
   const [totalStudents, setTotalStudents] = useState(0);
   const [activeStudents, setActiveStudents] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to control sidebar visibility
@@ -12,7 +12,6 @@ function DataPage({ data,d }) {
   const [activeFilters, setActiveFilters] = useState([]);
 
   const [isAuthorized, setIsAuthorized] = useState(true);
-
 
   const router = useRouter();
   let filteredData = data;
@@ -80,12 +79,11 @@ function DataPage({ data,d }) {
     const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
     // let isMatch ;
     // console.log(isMatch);
-    let isMatch = d.filter((it)=>usernameCookie === it._id);
+    let isMatch = d.filter((it) => usernameCookie === it._id);
     setIsAuthorized(isMatch);
-    if(isMatch.length === 0){
+    if (isMatch.length === 0) {
       setIsAuthorized(false);
     }
-
   }, [router.query]); // Add router.query to the dependency array
 
   const toggleSidebar = () => {
@@ -103,21 +101,20 @@ function DataPage({ data,d }) {
     // router.push(`/${ment}`); // Replace "/unauthorized" with the appropriate URL for unauthorized access
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <Head>
-        <title>Access Denied</title>
-      </Head>
-      <div className="text-center">
-        <h1 className="text-4xl font-semibold text-gray-800 mb-4">
-          You're not allowed to access this page
-        </h1>
-        <p className="text-lg text-gray-600">
-          Please contact the administrator for assistance.
-        </p>
+        <Head>
+          <title>Access Denied</title>
+        </Head>
+        <div className="text-center">
+          <h1 className="text-4xl font-semibold text-gray-800 mb-4">
+            You're not allowed to access this page
+          </h1>
+          <p className="text-lg text-gray-600">
+            Please contact the administrator for assistance.
+          </p>
+        </div>
       </div>
-    </div>
-    ) // Return null to prevent rendering this component
+    ); // Return null to prevent rendering this component
   }
-
 
   return (
     <>
@@ -219,9 +216,13 @@ function DataPage({ data,d }) {
 export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
-    const response = await fetch("https://gp-backend-u5ty.onrender.com/api/data/");
+    const response = await fetch(
+      "https://gp-backend-u5ty.onrender.com/api/data/"
+    );
     const data = await response.json();
-    const r = await fetch("https://gp-backend-u5ty.onrender.com/api/ownerData/");
+    const r = await fetch(
+      "https://gp-backend-u5ty.onrender.com/api/ownerData/"
+    );
     const d = await r.json();
 
     console.log(d);
@@ -237,7 +238,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         data: [],
-        d:[],
+        d: [],
       },
     };
   }
