@@ -11,19 +11,21 @@ function ForgotPassword() {
 
   const handleSendEmail = async () => {
     try {
-      const response = await fetch("https://gp-backend-u5ty.onrender.com/send-password-reset-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }), // Send the email to the backend
-      });
+      const response = await fetch(
+        "https://gp-backend-u5ty.onrender.com/send-password-reset-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }), // Send the email to the backend
+        }
+      );
 
       if (response.ok) {
         // Email sent successfully
         setMessage("Recovery email sent successfully.");
         router.push("/login");
-
       } else {
         // Error sending email
         setMessage("Failed to send recovery email. Please try again.");
@@ -39,10 +41,17 @@ function ForgotPassword() {
     <div className="container mx-auto h-screen flex justify-center items-center">
       <div className="w-full max-w-md">
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <h1 className="text-2xl font-bold mb-8 text-center">Forgot Password</h1>
-          {message && <p className="text-red-500 text-center mb-4">{message}</p>}
+          <h1 className="text-2xl font-bold mb-8 text-center">
+            Forgot Password
+          </h1>
+          {message && (
+            <p className="text-red-500 text-center mb-4">{message}</p>
+          )}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
               Email
             </label>
             <input
@@ -63,6 +72,12 @@ function ForgotPassword() {
               Send Email
             </button>
           </div>
+          <p
+            className="cursor-pointer  inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            onClick={() => router.push("/login")}
+          >
+            Back to Home
+          </p>
         </div>
       </div>
     </div>

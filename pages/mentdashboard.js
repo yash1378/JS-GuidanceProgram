@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 function DataPage({ data, d }) {
   const [isAuthorized, setIsAuthorized] = useState(true);
   let final = data;
   console.log(d);
+  const router = useRouter();
 
   useEffect(() => {
     const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
@@ -85,6 +87,19 @@ function DataPage({ data, d }) {
           </table>
         </div>
       </div>
+      <button
+        onClick={() => {
+          // Your button click handler here
+          router.push("/home");
+        }}
+        className="fixed bottom-6 right-12"
+      >
+        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            Go Back
+          </span>
+        </span>
+      </button>
     </>
   );
 }
@@ -92,9 +107,13 @@ function DataPage({ data, d }) {
 export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
-    const response = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData/");
+    const response = await fetch(
+      "https://gp-backend-u5ty.onrender.com/api/mentorData/"
+    );
     const data = await response.json();
-    const r = await fetch("https://gp-backend-u5ty.onrender.com/api/ownerData/");
+    const r = await fetch(
+      "https://gp-backend-u5ty.onrender.com/api/ownerData/"
+    );
     const d = await r.json();
 
     return {

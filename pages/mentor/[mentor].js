@@ -9,11 +9,13 @@ function DataPage({ data,d }) {
   const [isAuthorized, setIsAuthorized] = useState(true);
 
   let final = [];
-  console.log("ment -> "+ment);
+  console.log(data);
+  console.log(d);
+  // console.log("ment -> "+ment);
   let it = d.filter((item)=> item.name === ment);
-  console.log(it);
+  // console.log(it);
   final = data.filter((item) => item.mentor === ment);
-  console.log(d)
+  console.log(final)
 
 
 
@@ -97,6 +99,19 @@ function DataPage({ data,d }) {
           </table>
         </div>
       </div>
+      <button
+        onClick={() => {
+          // Your button click handler here
+          router.push("/login");
+        }}
+        className="fixed bottom-6 right-12"
+      >
+        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            Go Back
+          </span>
+        </span>
+      </button>
       {/* </div> */}
     </>
   );

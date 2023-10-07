@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from "react";
 import Toast from "@/components/Toast";
-import Cookies from "js-cookie"; 
+import Cookies from "js-cookie";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
-function Registration({data}) {
+function Registration({ data }) {
   const [selectedMentor, setSelectedMentor] = useState("");
   const [selectedStudentCount, setSelectedStudentCount] = useState("");
   const [mentors, setMentors] = useState([]); // Store mentor names fetched from the backend API
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const router = useRouter();
 
   const [isAuthorized, setIsAuthorized] = useState(true);
-  let final =data;
-
-
+  let final = data;
 
   useEffect(() => {
     const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
     // let isMatch ;
     // console.log(isMatch);
-    let isMatch = data.filter((it)=>usernameCookie === it._id);
+    let isMatch = data.filter((it) => usernameCookie === it._id);
     setIsAuthorized(isMatch);
-    if(isMatch.length === 0){
+    if (isMatch.length === 0) {
       setIsAuthorized(false);
     }
     fetchMentors();
-
   }, []);
 
   if (!isAuthorized) {
@@ -34,26 +33,27 @@ function Registration({data}) {
     // router.push(`/${ment}`); // Replace "/unauthorized" with the appropriate URL for unauthorized access
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <Head>
-        <title>Access Denied</title>
-      </Head>
-      <div className="text-center">
-        <h1 className="text-4xl font-semibold text-gray-800 mb-4">
-          You're not allowed to access this page
-        </h1>
-        <p className="text-lg text-gray-600">
-          Please contact the administrator for assistance.
-        </p>
+        <Head>
+          <title>Access Denied</title>
+        </Head>
+        <div className="text-center">
+          <h1 className="text-4xl font-semibold text-gray-800 mb-4">
+            You're not allowed to access this page
+          </h1>
+          <p className="text-lg text-gray-600">
+            Please contact the administrator for assistance.
+          </p>
+        </div>
       </div>
-    </div>
-    ) // Return null to prevent rendering this component
+    ); // Return null to prevent rendering this component
   }
-
 
   const fetchMentors = async () => {
     try {
       // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint to fetch mentors
-      const response = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData");
+      const response = await fetch(
+        "https://gp-backend-u5ty.onrender.com/api/mentorData"
+      );
       if (response.ok) {
         // console.log(response.json());
         const data = await response.json();
@@ -73,40 +73,46 @@ function Registration({data}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-        console.log("Form submitted with:", {
-          selectedMentor,
-          selectedStudentCount,
-        });
-    
-        // Send data to the backend API using fetch
-        try {
-          const response = await fetch("https://gp-backend-u5ty.onrender.com/api/update", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              mentorName: selectedMentor,
-              studentCount: selectedStudentCount,
-            }),
-          });
-    
-          if (response.ok) {
-            setMessage("Data Sent Successfully");
-            setColor("green");
-            showToastMessage();
-          } else {
-            console.error("Failed to update data.");
-          }
-        } catch (error) {
-          console.error("An error occurred while updating data:", error);
+
+    console.log("Form submitted with:", {
+      selectedMentor,
+      selectedStudentCount,
+    });
+
+    // Send data to the backend API using fetch
+    try {
+      const response = await fetch(
+        "https://gp-backend-u5ty.onrender.com/api/update",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            mentorName: selectedMentor,
+            studentCount: selectedStudentCount,
+          }),
         }
-    
-        setSelectedMentor("");
-        setSelectedStudentCount("");
-      };
-//   };
+      );
+
+      if (response.ok) {
+        setMessage("Data Sent Successfully");
+        setColor("green");
+        showToastMessage();
+      } else {
+        console.error("Failed to update data.");
+        setMessage("Failed");
+        setColor("Red");
+        showToastMessage();
+      }
+    } catch (error) {
+      console.error("An error occurred while updating data:", error);
+    }
+
+    setSelectedMentor("");
+    setSelectedStudentCount("");
+  };
+  //   };
 
   const showToastMessage = () => {
     setShowToast(true);
@@ -119,7 +125,10 @@ function Registration({data}) {
     <>
       <div
         className="mx-auto mt-8 p-4 rounded-lg bg-white dark:bg-gray-800"
-        style={{ maxWidth: "60vw", boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)" }}
+        style={{
+          maxWidth: "60vw",
+          boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",
+        }}
       >
         <form>
           <div className="mb-4">
@@ -166,10 +175,10 @@ function Registration({data}) {
               ))}
             </select>
           </div>
-          <div className="mb-4">
+          <div className="mb-4 flex justify-center">
             <button
               id="submitButton"
-              className={`relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 ${
+              className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 ${
                 selectedMentor && selectedStudentCount ? "has-value" : ""
               }`}
               type="submit"
@@ -179,7 +188,23 @@ function Registration({data}) {
                 Submit
               </span>
             </button>
+
+            {/* Subscription Type Field */}
+            <button
+              id="subscriptionTypeButton"
+              onClick={() => router.push("/home")}
+              className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 
+                  
+    `}
+              type="button"
+            >
+              <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Go Back
+              </span>
+            </button>
           </div>
+
+          {/* </div> */}
         </form>
       </div>
       <div
@@ -187,30 +212,36 @@ function Registration({data}) {
         style={{ maxWidth: "60vw" }}
       >
         {showToast && (
-          <Toast message={message} bgColor={color} onClose={() => setShowToast(false)} />
+          <Toast
+            message={message}
+            bgColor={color}
+            onClose={() => setShowToast(false)}
+          />
         )}
       </div>
     </>
   );
 }
 
-export async function getServerSideProps(context){
-  try{
-  const response = await fetch("https://gp-backend-u5ty.onrender.com/api/ownerData/");
-  const data = await response.json();
-  return {
-    props: {
-      data,
-    },
-  };
-} catch (error) {
-  console.error("Error fetching data:", error);
-  return {
-    props: {
-      data: [],
-    },
-  };
-}
+export async function getServerSideProps(context) {
+  try {
+    const response = await fetch(
+      "https://gp-backend-u5ty.onrender.com/api/ownerData/"
+    );
+    const data = await response.json();
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: [],
+      },
+    };
+  }
 }
 
 export default Registration;

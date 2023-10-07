@@ -1,0 +1,59 @@
+
+/* Add your custom CSS styles here */
+
+/* Example styles for the table header */
+.table100-head th.column1 {
+    width: 20%;
+    padding-left: 20px;
+  }
+  
+  .table100-head th.column2 {
+    width: 20%;
+    padding-left: 20px;
+  }
+  
+  .table100-head th.column3 {
+    width: 20%;
+    padding-left: 20px;
+  }
+  
+  .table100-head th.column4 {
+    width: 20%;
+    padding-left: 20px;
+  }
+  
+  .table100-head th.column5 {
+    width: 10%;
+    padding-left: 10px;
+  }
+  
+  .table100-head th.column6 {
+    width: 10%;
+    padding-left: 10px;
+  }
+  
+  /* Example styles for table rows */
+  .table100-body td.column1 {
+    padding-left: 20px;
+  }
+  
+  .table100-body td.column2 {
+    padding-left: 20px;
+  }
+  
+  .table100-body td.column3 {
+    padding-left: 20px;
+  }
+  
+  .table100-body td.column4 {
+    padding-left: 20px;
+  }
+  
+  .table100-body td.column5 {
+    padding-left: 10px;
+  }
+  
+  .table100-body td.column6 {
+    padding-left: 10px;
+  }
+  

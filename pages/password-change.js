@@ -27,18 +27,21 @@ const ChangePasswordPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://gp-backend-u5ty.onrender.com/change-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://gp-backend-u5ty.onrender.com/change-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         // Password changed successfully, handle success here
         console.log("Password changed successfully");
-        router.push('/login')
+        router.push("/login");
       } else {
         // Handle errors, e.g., display an error message to the user
         console.error("Password change failed");
@@ -61,9 +64,6 @@ const ChangePasswordPage = () => {
       <div className="container mx-auto h-screen flex justify-center items-center">
         <div className="w-full max-w-md">
           <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <h1 className="text-2xl font-bold mb-8 text-center">
-              Change Password
-            </h1>
             <form>
               <div className="mb-4">
                 <label
@@ -117,12 +117,12 @@ const ChangePasswordPage = () => {
                 />
               </div>
               <div className="flex items-center justify-between">
-                <button onClick={handleSubmit} className="btn-primary">
+                <button onClick={handleSubmit} className="text-center cursor-pointer inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
                   Change Password
                 </button>
                 <p
                   className="cursor-pointer inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                  onClick={() => router.push("/")}
+                  onClick={() => router.push("/login")}
                 >
                   Back to Home
                 </p>
