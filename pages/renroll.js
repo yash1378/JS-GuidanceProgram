@@ -40,7 +40,7 @@ function Enroll({ data }) {
 
     try {
       // Send data to the backend API
-      const response = await fetch("https://gp-backend-u5ty.onrender.com/renroll", {
+      const response = await fetch("https://gp-backend-u5ty.onrender.com/renroll/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,6 +51,7 @@ function Enroll({ data }) {
           date: selectedDate,
         }),
       });
+      console.log(response)
 
       if (response.ok) {
         console.log("Data submitted successfully!");

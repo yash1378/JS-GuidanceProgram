@@ -53,7 +53,7 @@ function DataPage({ data, d }) {
           rel="stylesheet"
         />
       </Head>
-      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen bg-white mt-0">
+      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0">
         <h1 className=" text-white text-4xl font-'Roboto Slab' mt-3">
           <b>Data Table</b>
         </h1>
