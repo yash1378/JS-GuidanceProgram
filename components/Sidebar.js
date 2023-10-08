@@ -50,7 +50,8 @@ function Sidebar({ isOpen, closeSidebar }) {
 
   const removefilter = () =>{
     router.push('/stdashboard/');
-    setEnrol(false);
+
+    resetValues();
 
   }
 
@@ -60,6 +61,7 @@ function Sidebar({ isOpen, closeSidebar }) {
     setIsCalendarOpen(true);
     setDate("");
     setSelectedMentor("");
+    setEnrol(false);
   };
 
 
@@ -111,13 +113,13 @@ function Sidebar({ isOpen, closeSidebar }) {
       </button>
 
       {/* Currently Enrolled Button */}
-      <button className="ml-0 mt-40 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-70" onClick={() => setEnrol(true)}>
+      <button className="ml-0 mt-40 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-70 hover:bg-zinc-800" onClick={() => setEnrol(true)}>
         Currently Enrolled
       </button>
 
       {/* Calendar */}
       {isCalendarOpen && (
-        <div className="w-full ml-0 mb-5 px-3 py-3 mb-2 text-white bg-zinc-700 relative z-70">
+        <div className="w-full ml-0 mb-5 px-3 py-3 mb-2 text-white bg-zinc-700 relative z-70 hover:bg-zinc-800">
           <input
             type="date"
             id="endDate"
@@ -134,7 +136,7 @@ function Sidebar({ isOpen, closeSidebar }) {
       {/* Dropdown Button */}
       <div className="relative z-70">
         <button
-          className="w-full ml-0 px-3 py-5 mb-2 text-white bg-zinc-700 relative z-70"
+          className="w-full ml-0 px-3 py-5 mb-2 text-white bg-zinc-700 relative z-70 hover:bg-zinc-800"
           onClick={toggleDropdown}
         >
           {selectedMentor ? selectedMentor : "Sort by Mentor"}
@@ -155,7 +157,7 @@ function Sidebar({ isOpen, closeSidebar }) {
         </button>
         {/* Dropdown Content */}
         {isDropdownOpen && (
-          <div className="absolute mt-1 w-full bg-zinc-700 text-white rounded-lg py-2 text-left z-70">
+          <div className="absolute mt-1 w-full bg-zinc-700 text-white rounded-lg py-2 text-left z-70 hover:bg-zinc-800">
             {mentorData.map((mentor) => (
               <button
                 key={mentor.id}
@@ -175,14 +177,14 @@ function Sidebar({ isOpen, closeSidebar }) {
       </div>
       {/* ... rest of your sidebar content */}
       <button
-        className="ml-0 mt-5 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-60"
+        className="ml-0 mt-5 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-60 hover:bg-zinc-800"
         onClick={changeurl}
     
       >
         Apply Filters
       </button>
       <button
-        className="ml-0 mt-2 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-60"
+        className="ml-0 mt-2 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-60 hover:bg-zinc-800"
         onClick={removefilter}
     
       >

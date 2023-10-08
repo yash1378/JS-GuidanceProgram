@@ -174,7 +174,7 @@ function Registration() {
               htmlFor="paymentDate"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Date of Payment
+              Date of Mentor Assigned
             </label>
             <input
               type="date"
@@ -373,75 +373,23 @@ function Registration() {
                 htmlFor="reenrollment"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Reenrollment
+                Re Enrollment
               </label>
+              <div className="w-full md:w-1/3 mb-2 md:mb-0 mr-10">
               <button
-                id="reenrollmentDropdownButton"
-                // data-dropdown-toggle="dropdown"
-                className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
-                  reenrollment ? "has-value" : ""
+                id="classButton"
+                className={`relative inline-flex items-center h-[8vh] w-[18vw] justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 ${
+                  selectedClass ? "has-value" : ""
                 }`}
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleDropdown("reenrollment");
-                }}
+                type="submit"
+                onClick={()=> router.push('/renroll')}
               >
-                {reenrollment ? "Yes" : "No"}{" "}
-                <svg
-                  className="w-2.5 h-2.5 ml-2.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
+                <span className="relative px-20 py-4 h-[7.5vh] w-[18vw] transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Click Here
+                </span>
               </button>
-              {/* Dropdown menu */}
-              <div
-                id="reenrollmentDropdown"
-                className={`z-10 ${
-                  reenrollmentDropdownOpen ? "block" : "hidden"
-                } bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
-                style={{ zIndex: 10 }}
-              >
-                <ul
-                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                  aria-labelledby="reenrollmentDropdownButton"
-                >
-                  <li>
-                    <button
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setReenrollment(true);
-                        toggleDropdown("reenrollment");
-                      }}
-                    >
-                      Yes
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setReenrollment(false);
-                        toggleDropdown("reenrollment");
-                      }}
-                    >
-                      No
-                    </button>
-                  </li>
-                </ul>
-              </div>
+            </div>
+
             </div>
           </div>
           <div className="mb-4 md:flex md:space-x-2">

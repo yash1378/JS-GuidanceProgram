@@ -139,7 +139,7 @@ function DataPage({ data, d }) {
       {/* Background overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed top-0 left-0 z-30 w-full h-full bg-black opacity-70 transition-opacity duration-300 ease-in-out"
+          className=" fixed top-0 left-0 z-30 w-full h-full bg-black opacity-70 transition-opacity duration-300 ease-in-out"
           onClick={() => setIsSidebarOpen(false)} // Close the sidebar when overlay is clicked
         ></div>
       )}
@@ -152,51 +152,107 @@ function DataPage({ data, d }) {
            (rest of your page content)
         */}
       </div>
-      {/* Page Content */}
-      <div className="flex-1">
-        <h1 className="text-2xl font-semibold mb-4 relative ml-40 mt-5">
-          Data Table
+      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0" >
+        <h1 className=" text-white text-4xl font-'Roboto Slab' mt-3">
+          <b>Data Table</b>
         </h1>
-        <div
-          className="container mx-auto mt-10 overflow-y-auto"
-          style={{ maxWidth: "80vw", maxHeight: "60vh" }}
-        >
-          <table
-            className="min-w-full border-collapse border border-gray-300"
-            style={{ borderRadius: "20px" }}
-          >
-            <thead className="bg-gray-900 text-white">
-              <tr>
-                <th className="border border-gray-300 p-2">No.</th>
-                <th className="border border-gray-300 p-2">Student Name</th>
-                <th className="border border-gray-300 p-2">Enrollment Date</th>
-                <th className="border border-gray-300 p-2">Mobile.No</th>
-                <th className="border border-gray-300 p-2">Mentor Name</th>
-                <th className="border border-gray-300 p-2">Sub Type</th>
-                <th className="border border-gray-300 p-2">Class</th>
-                <th className="border border-gray-300 p-2">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              {final.map((item, index) => (
-                <tr
-                  key={item._id}
-                  className={index % 2 === 0 ? "bg-gray-200" : "bg-gray-400"}
-                >
-                  <td className="border border-gray-300 p-2">{index + 1}</td>
-                  <td className="border border-gray-300 p-2">{item.name}</td>
-                  <td className="border border-gray-300 p-2">{item.date}</td>
-                  <td className="border border-gray-300 p-2">{item.phone}</td>
-                  <td className="border border-gray-300 p-2">{item.mentor}</td>
-                  <td className="border border-gray-300 p-2">{item.sub}</td>
-                  <td className="border border-gray-300 p-2">{item.class}</td>
-                  <td className="border border-gray-300 p-2">{item.email}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="mb-4 ml-40 relative mt-10">
+        <div className="flex flex-col w-[85vw] h-[85vh]  mt-6 " >
+          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+              <div className="shadow-2xl overflow-hidden sm:rounded-lg">
+                <table className="min-w-full text-sm text-white sm:table">
+                  <thead className="bg-gray-800 text-xs uppercase font-medium">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left tracking-wider"
+                      >
+                        No.
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left tracking-wider"
+                      >
+                        Student Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left tracking-wider"
+                      >
+                        Enrollment Date
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left tracking-wider"
+                      >
+                        Mobile.No
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left tracking-wider"
+                      >
+                        Mentor Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left tracking-wider"
+                      >
+                        Sub Type
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left tracking-wider"
+                      >
+                        Class
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left tracking-wider"
+                      >
+                        Email
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-gray-800">
+                    {final.map((item, index) => (
+                      <tr
+                        key={item._id}
+                        className={
+                          index % 2 === 0 ? "bg-black bg-opacity-20" : ""
+                        }
+                      >
+                        <td className="pl-4">{index + 1}</td>
+                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                          <span className="sm:block">{item.name}</span>
+                        </td>
+                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                          <span className="sm:block">{item.date}</span>
+                        </td>
+                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                          <span className="sm:block">{item.phone}</span>
+                        </td>
+                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                          <span className="sm:block">{item.mentor}</span>
+                        </td>
+                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                          <span className="sm:block">{item.sub}</span>
+                        </td>
+                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                          <span className="sm:block">{item.class}</span>
+                        </td>
+                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                          <span className="sm:block">{item.email}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <br />
+          {/* <div className="border-solid border-2 border-indigo-600">Yash</div> */}
+          <div className=" relative text-white mt-35 z-100 ml-0 ">
           <div className="relative mb-5 font-bold text-2xl">
             Total Students: {totalStudents}
           </div>
@@ -207,6 +263,8 @@ function DataPage({ data, d }) {
             Active Filters: {activeFilters.join(", ")}
           </div>
         </div>
+        </div>
+
       </div>
       <button
         onClick={() => {
@@ -221,6 +279,7 @@ function DataPage({ data, d }) {
           </span>
         </span>
       </button>
+
 
 
       {/* </div> */}

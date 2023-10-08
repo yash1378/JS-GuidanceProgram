@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import "@/styles/Home.module.css";
 import Head from "next/head";
 import Cookies from "js-cookie"; // Import the Cookies library
+
 function DataPage({ data, d }) {
   const router = useRouter();
   const ment = router.query.mentor;
@@ -11,9 +11,7 @@ function DataPage({ data, d }) {
   let final = [];
   console.log(data);
   console.log(d);
-  // console.log("ment -> "+ment);
   let it = d.filter((item) => item.name === ment);
-  // console.log(it);
   final = data.filter((item) => item.mentor === ment);
   console.log(final);
 
@@ -24,8 +22,6 @@ function DataPage({ data, d }) {
   }, [ment]);
 
   if (!isAuthorized) {
-    // If the username in the cookie doesn't match the mentor name, you can redirect the user
-    // router.push(`/${ment}`); // Replace "/unauthorized" with the appropriate URL for unauthorized access
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <Head>
@@ -40,37 +36,37 @@ function DataPage({ data, d }) {
           </p>
         </div>
       </div>
-    ); // Return null to prevent rendering this component
+    );
   }
 
   return (
     <>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Slab:wght@900&display=swap"
           rel="stylesheet"
         />
       </Head>
-      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen bg-white mt-0">
-        <h1 className=" text-white text-4xl font-'Roboto Slab' mt-3">
+      <div className="flex flex-col items-center w-screen min-h-screen bg-white mt-0">
+        <h1 className="text-lg text-gray-700 font-'Roboto Slab' mt-3">
           <b>Data Table</b>
         </h1>
-        <div className="flex flex-col  mt-6"         style={{ maxWidth: "80vw", maxHeight: "60vh" }}>
-          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-              <div className="shadow-2xl overflow-hidden sm:rounded-lg">
-                <table className="min-w-full text-sm text-white sm:table">
-                  <thead className="bg-gray-800 text-xs uppercase font-medium">
-                    <tr>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-left tracking-wider"
-                      >
-                        No.
-                      </th>
-                      <th
+        {window.innerWidth >= 952 ? (
+          <div className="w-full mt-6">
+            <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div className="shadow overflow-hidden sm:rounded-lg">
+                  <table className="min-w-full text-sm text-white sm:table">
+                    <thead className="bg-gray-800 text-xs uppercase font-medium">
+                      <tr>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left tracking-wider"
+                        >
+                          No.
+                        </th>                      <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
@@ -112,18 +108,20 @@ function DataPage({ data, d }) {
                       >
                         Email
                       </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-gray-800">
-                    {final.map((item, index) => (
-                      <tr
-                        key={item._id}
-                        className={
-                          index % 2 === 0 ? "bg-black bg-opacity-20" : ""
-                        }
-                      >
-                        <td className="pl-4">{index + 1}</td>
-                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+
+                        {/* ... Rest of the table headers ... */}
+                      </tr>
+                    </thead>
+                    <tbody className="bg-gray-800">
+                      {final.map((item, index) => (
+                        <tr
+                          key={item._id}
+                          className={
+                            index % 2 === 0 ? "bg-black bg-opacity-20" : ""
+                          }
+                        >
+                          <td className="pl-4">{index + 1}</td>
+                          <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.name}</span>
                         </td>
                         <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
@@ -144,14 +142,39 @@ function DataPage({ data, d }) {
                         <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.email}</span>
                         </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                          {/* ... Rest of the table rows ... */}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-col border-solid border-2 border-indigo-600 w-full mt-6">
+            {final.map((item, index) => (
+              <div
+                key={item._id}
+                className={
+                  index % 2 === 0
+                    ? "bg-black bg-opacity-20 p-4"
+                    : "p-4 bg-gray-800"
+                }
+              >
+                <div className="text-white">No. {index + 1}</div>
+                <div className="text-white">Student Name. {item.name}</div>
+                <div className="text-white">Enrollment Date. {item.date}</div>
+                <div className="text-white">Mobile No. {item.phone}</div>
+                <div className="text-white">Mentor Name {item.mentor}</div>
+                <div className="text-white">Sub Type {item.sub}</div>
+                <div className="text-white">Class {item.class}</div>
+                <div className="text-white">Email {item.email}</div>
+                {/* ... Rest of the data fields ... */}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <button
         onClick={() => {
@@ -166,7 +189,6 @@ function DataPage({ data, d }) {
           </span>
         </span>
       </button>
-      {/* </div> */}
     </>
   );
 }
@@ -174,9 +196,9 @@ function DataPage({ data, d }) {
 export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
-    const response = await fetch("https://gp-backend-u5ty.onrender.com/api/data/");
+    const response = await fetch("http://localhost:4000/api/data/");
     const data = await response.json();
-    const r = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData/");
+    const r = await fetch("http://localhost:4000/api/mentorData/");
     const d = await r.json();
 
     return {

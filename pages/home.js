@@ -76,6 +76,9 @@ import styles from "../styles/Home.module.css";
           <Link href="/pending">
             <div className={styles.button}>Student Assigning</div>
           </Link>
+          <Link href="/delete">
+            <div className={styles.button}>Delete Student Data</div>
+          </Link>
         </div>
       </main>
 

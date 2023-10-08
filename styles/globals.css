@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* Tailwind CSS classes for label animations */
 .has-value ~ label,
 :focus ~ label {
   transform: translateY(0) scale(0.75);
   top: 0.4rem;
 }
+
+/* Media query for responsive layout */
 @media (max-width: 779px) {
   .flex-wrap {
     flex-direction: column; /* Stack buttons and fields vertically */
@@ -19,6 +21,32 @@
   }
 }
 
-.border {
-  border: 1px solid #e2e8f0; /* Adjust the color and width as needed */
+/* Styling scrollbars for Webkit-based browsers (Chrome, Safari, Opera) */
+/* Note: You may need to use browser-specific prefixes for some properties */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
 }
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 6px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the thumb on hover */
+}
+
+/* Styling scrollbars for Firefox */
+/* Note: Firefox has its own pseudo-elements for scrollbar styling */
+/* These rules will apply to Firefox */
+/* You can also add browser-specific prefixes for certain properties */
+/* Example: scrollbar-width: thin; */
+/* Example: scrollbar-color: #888 #f1f1f1; */
+
+/* Styling scrollbars for Microsoft Edge */
+/* Note: Edge also has its own scrollbar pseudo-elements */
+/* These rules will apply to Edge */
+/* You can also add browser-specific prefixes for certain properties */
+/* Example: -ms-overflow-style: none; */
+/* Example: scrollbar-width: thin; */
+/* Example: scrollbar-color: #888 #f1f1f1; */

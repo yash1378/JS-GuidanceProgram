@@ -107,14 +107,14 @@ const DataPage = ({
       <div className="flex">
         <div className="w-1/2 pr-4">
           <div
-            className="relative ml-10 mt-20 overflow-x-auto shadow-md sm:rounded-lg"
+            className="relative ml-5 mt-20 overflow-x-auto shadow-md sm:rounded-lg"
             style={{ maxWidth: "70vw", maxHeight: "70vh", overflow: "auto" }}
           >
             <table
               className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
               style={{ minWidth: "100%" }} // Ensure the table is at least as wide as the container
             >
-              <thead className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <thead className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400" style={{ position: 'sticky', top: '0' }}>
                 <tr>
                   <th scope="col" className="px-6 py-3">
                     Select
@@ -167,14 +167,14 @@ const DataPage = ({
 
         <div className="w-1/2 pl-4">
           <div
-            className="relative ml-10 mt-20 overflow-x-auto shadow-md sm:rounded-lg"
+            className="relative ml-0 mt-20 overflow-x-auto shadow-md sm:rounded-lg"
             style={{ maxWidth: "70vw", maxHeight: "70vh", overflow: "auto" }}
           >
             <table
               className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
               style={{ minWidth: "100%" }} // Ensure the table is at least as wide as the container
             >
-              <thead className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <thead className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400" style={{ position: 'sticky', top: '0' }}>
                 <tr>
                   {/* Add headers for additional data */}
                   <th scope="col" className="px-6 py-3">
