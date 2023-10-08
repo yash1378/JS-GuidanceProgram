@@ -57,7 +57,7 @@ function Enroll({ data }) {
         // Reset form fields
         setSearchText("");
         setSelectedMentor("");
-        setSelectedDate(new Date());
+        setSelectedDate("");
       } else {
         console.error("Error submitting data to the backend.");
       }
@@ -67,8 +67,8 @@ function Enroll({ data }) {
   };
 
   return (
-    <div className="bg-gray-700 w-screen min-h-screen border-solid border-2 border-indigo-600 overflow-hidden">
-      <h1 className="relative py-7 w-[100vw] text-center text-4xl text-white border-solid border-2 border-indigo-600 mx-auto">
+    <div className="bg-gray-700 w-screen min-h-screen  overflow-hidden">
+      <h1 className="relative py-7 w-[100vw] text-center text-4xl text-white  mx-auto">
         <b> Type the Name of the Student to Search</b>
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-wrap justify-center">
