@@ -72,7 +72,7 @@ function Enroll({ data }) {
     try {
       // Send data to the backend API
       const response = await fetch(
-        "http://localhost:4000/renrollment/",
+        "https://gp-backend-u5ty.onrender.com/renrollment/",
         {
           method: "POST",
           headers: {
@@ -246,7 +246,7 @@ export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
     const response = await fetch(
-      "http://localhost:4000/api/data/"
+      "https://gp-backend-u5ty.onrender.com/api/data/"
     );
     const data = await response.json();
 
