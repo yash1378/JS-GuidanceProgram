@@ -16,6 +16,18 @@ function ParentComponent({ data,t }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [isAuthorized, setIsAuthorized] = useState(true);
+  const [searchText, setSearchText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedDate, setSelectedDate] = useState();
+  const [studentData, setStudentData] = useState(data);
+  const [selectedMentor, setSelectedMentor] = useState(""); // State to track selected mentor
+  console.log(data);
+  console.log(studentData);
+  useEffect(() => {
+    // Fetch data from the API and set it to studentData
+    // ...
+  }, [data]);
+
   const router = useRouter();
 
   // Function to open the modal
@@ -29,6 +41,30 @@ function ParentComponent({ data,t }) {
     setSelectedIds([]);
 
   };
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    console.log(value)
+    console.log(studentData)
+    const filteredNames = studentData.filter((student) =>
+      student.phone.toLowerCase().startsWith(value.toLowerCase())
+    );
+
+    setSearchText(value);
+    setSuggestions(filteredNames); // Update suggestions
+  };
+
+
+  const handleSuggestionClick = (student) => {
+    setSearchText(student.phone); // Update the search text with the student's phone
+    setSelectedMentor(student.mentor);
+    setSelectedIds([student._id]); // Use the clicked student's _id
+    setSelectedMentorNames([student.mentor]); // Use the clicked student's mentor
+    console.log(selectedMentorNames)
+    console.log(selectedIds)
+
+  };
+  
 
 
 
@@ -48,7 +84,7 @@ function ParentComponent({ data,t }) {
     }
     }
   };
-  console.log(selectedIds);
+  // console.log(selectedIds);
 
   const handleRefundClick = async () => {
     try {
@@ -75,6 +111,9 @@ function ParentComponent({ data,t }) {
         if (updatedData) {
           setDat(updatedData);
         }
+        setSearchText("");
+        setSelectedMentor("");
+        setSelectedDate("");
       } else {
         setMessage("Failed to refund selected rows.");
       }
@@ -129,6 +168,55 @@ function ParentComponent({ data,t }) {
         <h1 className="text-white text-4xl font-'Roboto Slab' mt-3">
           <b>Refund Page</b>
         </h1>
+        <div>
+          {/* Search Bar */}
+          <label
+            htmlFor="default-search"
+            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+          >
+            Search
+          </label>
+          <div
+            className="relative mt-5 w-[80vw] mx-auto"
+            style={{ position: "sticky", top: "0" }}
+          >
+            <input
+              type="search"
+              id="default-search"
+              className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search Student by Phone No..."
+              required
+              value={searchText}
+              onChange={handleSearchChange}
+            />
+            {searchText.length > 0 && (
+              <div className="suggestions text-white">
+                {suggestions.length > 0 && (
+                  <ul>
+                    {suggestions.map((student, index) => (
+                      <li
+                        className={`
+                ${
+                  index % 2 === 0 ? "bg-black bg-opacity-20" : ""
+                } hover:bg-indigo-600 hover:text-white
+              `}
+                        style={{ cursor: "pointer" }}
+                        key={student.name}
+                        onClick={() => {
+                          handleSuggestionClick(student);
+                          setSuggestions([]);
+                        }}
+                      >
+                        {student.name} - Mentor: {student.mentor}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+          {/* End of Search Bar */}
+        </div>
         <div className="flex flex-col w-[80vw] h-[80vh] mt-6">
           <button
             onClick={()=>{

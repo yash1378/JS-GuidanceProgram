@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
+import Toast from "@/components/Toast";
 import "react-datepicker/dist/react-datepicker.css";
+import Modal from "@/components/Modal";
 
 // Define your API endpoint
 // Replace with your actual API endpoint
@@ -11,47 +12,84 @@ function Enroll({ data }) {
   const [selectedDate, setSelectedDate] = useState();
   const [studentData, setStudentData] = useState(data);
   const [selectedMentor, setSelectedMentor] = useState(""); // State to track selected mentor
-  console.log(data);
-  console.log(studentData);
+  const [message, setMessage] = useState("");
+  const [color, setColor] = useState("");
+  const [showToast, setshowToast] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [classs, setClasss] = useState("");
+  const [sub, setSub] = useState("");
+  const [date, setDate] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+//   console.log(data);
+//   console.log(studentData);
   useEffect(() => {
     // Fetch data from the API and set it to studentData
     // ...
   }, [data]);
 
+  // Function to open the modal
+  const openModal = (e) => {
+    e.preventDefault(); //this command is necessary otheriwse the form will get reload
+    setIsModalVisible(true);
+  };
+
+  // Function to close the modal
+  const closeModal = (e) => {
+    e.preventDefault(); //this command is necessary otheriwse the form will get reload
+    setIsModalVisible(false);
+  };
+
+
   const handleSearchChange = (e) => {
     const value = e.target.value;
     const filteredNames = studentData.filter((student) =>
-      student.name.toLowerCase().startsWith(value.toLowerCase())
+      student.phone.toLowerCase().startsWith(value.toLowerCase())
     );
 
     setSearchText(value);
     setSuggestions(filteredNames); // Update suggestions
   };
 
-
   const handleSuggestionClick = (student) => {
+    console.log(student);
     setSearchText(student.name);
     setSelectedMentor(student.mentor);
+    setPhone(student.phone);
+    setEmail(student.email);
+    setClasss(student.class);
+    setSub(student.sub);
+    setDate(student.date);
+    
     // setSuggestions([]); // Clear suggestions
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+    closeModal(e);
     try {
       // Send data to the backend API
-      const response = await fetch("https://gp-backend-u5ty.onrender.com/renroll/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          studentName: searchText,
-          mentorName: selectedMentor,
-          date: selectedDate,
-        }),
-      });
-      console.log(response)
+      const response = await fetch(
+        "http://localhost:4000/renrollment/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            studentName: searchText,
+            mentorName: selectedMentor,
+            date: selectedDate,
+            phone: phone,
+            email: email,
+            classs: classs,
+            sub: sub,
+          }),
+        }
+      );
+      console.log(response);
 
       if (response.ok) {
         console.log("Data submitted successfully!");
@@ -59,12 +97,28 @@ function Enroll({ data }) {
         setSearchText("");
         setSelectedMentor("");
         setSelectedDate("");
+        setMessage("Renrolled Successfully");
+        setColor("green");
+        toast();
       } else {
         console.error("Error submitting data to the backend.");
+        setMessage("Failed to submit for Data");
+        setColor("red");
+        toast();
       }
     } catch (error) {
       console.error("Error:", error);
+      setMessage("Failed to submit for Data");
+      setColor("red");
+      toast();
     }
+  };
+
+  const toast = async () => {
+    setshowToast(true);
+    setTimeout(() => {
+      setshowToast(false); // Hide the toast after 3 seconds
+    }, 3000);
   };
 
   return (
@@ -72,7 +126,7 @@ function Enroll({ data }) {
       <h1 className="relative py-7 w-[100vw] text-center text-4xl text-white  mx-auto">
         <b> Type the Name of the Student to Search</b>
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-wrap justify-center">
+      <form  className="flex flex-wrap justify-center">
         <div>
           {/* Search Bar */}
           <label
@@ -89,7 +143,7 @@ function Enroll({ data }) {
               type="search"
               id="default-search"
               className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search Student by name..."
+              placeholder="Search Student by PhoneNo..."
               required
               value={searchText}
               onChange={handleSearchChange}
@@ -137,14 +191,52 @@ function Enroll({ data }) {
             id="classButton"
             className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800`}
             type="submit"
-            onClick={handleSubmit}
+            onClick={openModal}
           >
             <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
               Submit
             </span>
           </button>
+          {isModalVisible && (
+        <Modal onClose={closeModal}>
+          <div className="p-6 text-center">
+            <svg
+              className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            ></svg>
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Are you sure you want to assign this mentor to Selected Students?
+            </h3>
+            <button
+            onClick={handleSubmit} // Call handleSubmit when "Yes, I'm sure" is clicked
+              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+            >
+              Yes, I'm sure
+            </button>
+            <button
+              onClick={closeModal} // Close the modal when "No, cancel" is clicked
+              className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+            >
+              No, cancel
+            </button>
+          </div>
+        </Modal>
+      )}
+
         </div>
       </form>
+
+      {/* Display the success toast if showSuccessToast is true */}
+      {showToast && (
+        <Toast
+          message={message}
+          bgColor={color}
+          onClose={() => setshowToast(false)}
+        />
+      )}
     </div>
   );
 }
@@ -153,7 +245,9 @@ function Enroll({ data }) {
 export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
-    const response = await fetch("https://gp-backend-u5ty.onrender.com/api/data/");
+    const response = await fetch(
+      "http://localhost:4000/api/data/"
+    );
     const data = await response.json();
 
     console.log(data);

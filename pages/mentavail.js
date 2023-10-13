@@ -3,6 +3,7 @@ import Toast from "@/components/Toast";
 import Cookies from "js-cookie";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Modal from "@/components/Modal";
 
 function Registration({ data }) {
   const [selectedMentor, setSelectedMentor] = useState("");
@@ -15,6 +16,20 @@ function Registration({ data }) {
 
   const [isAuthorized, setIsAuthorized] = useState(true);
   let final = data;
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // Function to open the modal
+  const openModal = (e) => {
+    e.preventDefault(); //this command is necessary otheriwse the form will get reload
+    setIsModalVisible(true);
+  };
+
+  // Function to close the modal
+  const closeModal = (e) => {
+    e.preventDefault(); //this command is necessary otheriwse the form will get reload
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
@@ -73,6 +88,7 @@ function Registration({ data }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    closeModal(e);
 
     console.log("Form submitted with:", {
       selectedMentor,
@@ -182,7 +198,7 @@ function Registration({ data }) {
                 selectedMentor && selectedStudentCount ? "has-value" : ""
               }`}
               type="submit"
-              onClick={handleSubmit}
+              onClick={openModal}
             >
               <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                 Submit
@@ -202,6 +218,35 @@ function Registration({ data }) {
                 Go Back
               </span>
             </button>
+            {isModalVisible && (
+              <Modal onClose={closeModal}>
+                <div className="p-6 text-center">
+                  <svg
+                    className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  ></svg>
+                  <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                    Are you sure you want to assign this mentor to Selected
+                    Students?
+                  </h3>
+                  <button
+                    onClick={handleSubmit} // Call handleSubmit when "Yes, I'm sure" is clicked
+                    className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                  >
+                    Yes, I'm sure
+                  </button>
+                  <button
+                    onClick={closeModal} // Close the modal when "No, cancel" is clicked
+                    className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                  >
+                    No, cancel
+                  </button>
+                </div>
+              </Modal>
+            )}
           </div>
 
           {/* </div> */}

@@ -136,6 +136,9 @@ function DataPage({ data, d }) {
         />
       </div>
 
+
+
+
       {/* Background overlay */}
       {isSidebarOpen && (
         <div

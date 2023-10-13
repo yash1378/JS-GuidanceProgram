@@ -37,9 +37,32 @@ const DataPage = ({
   };
 
   // Handle mentor selection
-  const handleMentorSelect = (mentorName) => {
-    setSelectedMentor(mentorName);
+  const handleMentorSelect =(mentorName) => {
+    console.log(selectedMentor)
+    console.log(mentorName)
+    if(selectedMentor === mentorName){
+      setSelectedMentor("");
+    }
+    else{
+      setSelectedMentor(mentorName);
+    }
+    console.log(selectedMentor);
+
+
   };
+
+  // const handleMentorSelect = (mentorName) => {
+  //   console.log(selectedMentor)
+  //   setSelectedMentor((prevMentor) => {
+  //     if (prevMentor === mentorName) {
+  //       return ""; // Set to an empty string if it's the same mentor
+  //     } else {
+  //       return mentorName;
+  //     }
+  //   });
+  //   console.log(selectedMentor)
+  // };
+  
 
   // Handle form submission
   const handleSubmit = async () => {
@@ -64,6 +87,7 @@ const DataPage = ({
           }),
         }
       );
+      console.log(selectedMentor);
       if (response.ok) {
         // Handle success
         console.log("Mentor and students updated successfully");
@@ -114,7 +138,10 @@ const DataPage = ({
               className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
               style={{ minWidth: "100%" }} // Ensure the table is at least as wide as the container
             >
-              <thead className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400" style={{ position: 'sticky', top: '0' }}>
+              <thead
+                className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                style={{ position: "sticky", top: "0" }}
+              >
                 <tr>
                   <th scope="col" className="px-6 py-3">
                     Select
@@ -174,7 +201,10 @@ const DataPage = ({
               className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
               style={{ minWidth: "100%" }} // Ensure the table is at least as wide as the container
             >
-              <thead className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400" style={{ position: 'sticky', top: '0' }}>
+              <thead
+                className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                style={{ position: "sticky", top: "0" }}
+              >
                 <tr>
                   {/* Add headers for additional data */}
                   <th scope="col" className="px-6 py-3">
@@ -202,14 +232,27 @@ const DataPage = ({
                     </td>
                     <td className="border px-6 py-4">{item.on}</td>
                     <td className="border px-6 py-4">
-                      {item.handle - item.on}
+                      {item.handle - item.on >= 1 ? ( // Check if the difference is greater than or equal to 1
+                        item.handle - item.on
+                      ) : (
+                        <span>Not available</span> // Display a message if not available
+                      )}
                     </td>
                     <td className="border px-6 py-4">
-                      <input
-                        type="checkbox"
-                        checked={selectedMentor === item.name} // Check if the mentor name matches the selectedMentor
-                        onChange={() => handleMentorSelect(item.name)} // Pass the mentor name
-                      />
+                      {item.handle - item.on < 1 ? ( // Check if the condition is met
+                        <input
+                          className="cursor-pointer"
+                          type="checkbox"
+                          disabled // Disable the checkbox when condition is not met
+                        />
+                      ) : (
+                        <input
+                          type="checkbox"
+                          className="cursor-pointer"
+                          checked={selectedMentor === item.name}
+                          onChange={() => handleMentorSelect(item.name)}
+                        />
+                      )}
                     </td>
                   </tr>
                 ))}

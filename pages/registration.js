@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Toast from "@/components/Toast";
 import { useRouter } from "next/router";
+import Head from "next/head";
+import Cookies from "js-cookie";
+import Modal from "@/components/Modal";
 
-function Registration() {
+function Registration({data,d}) {
   const [studentName, setStudentName] = useState("");
   const router = useRouter(); 
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -15,13 +18,59 @@ function Registration() {
   const [color, setColor] = useState("");
   // State variables to track dropdown open/closed state
   const [classDropdownOpen, setClassDropdownOpen] = useState(false);
-  const [subscriptionTypeDropdownOpen, setSubscriptionTypeDropdownOpen] =
-    useState(false);
-  const [reenrollmentDropdownOpen, setReenrollmentDropdownOpen] =
-    useState(false);
-
+  const [subscriptionTypeDropdownOpen, setSubscriptionTypeDropdownOpen] =useState(false);
+  const [reenrollmentDropdownOpen, setReenrollmentDropdownOpen] =useState(false);
   // Add state variable for toast visibility
   const [showToast, setshowToast] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  let final = d;
+  console.log(d);
+
+  // Function to open the modal
+  const openModal = (e) => {
+    e.preventDefault(); //this command is necessary otheriwse the form will get reload
+    setIsModalVisible(true);
+  };
+
+  // Function to close the modal
+  const closeModal = (e) => {
+    e.preventDefault(); //this command is necessary otheriwse the form will get reload
+    setIsModalVisible(false);
+  };
+
+
+  useEffect(() => {
+    const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
+    // let isMatch ;
+    // console.log(isMatch);
+    let isMatch = d.filter((it) => usernameCookie === it._id);
+    setIsAuthorized(isMatch);
+    if (isMatch.length === 0) {
+      setIsAuthorized(false);
+    }
+  }, [final]);
+
+  if (!isAuthorized) {
+    // If the username in the cookie doesn't match the mentor name, you can redirect the user
+    // router.push(`/${ment}`); // Replace "/unauthorized" with the appropriate URL for unauthorized access
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <Head>
+          <title>Access Denied</title>
+        </Head>
+        <div className="text-center">
+          <h1 className="text-4xl font-semibold text-gray-800 mb-4">
+            You're not allowed to access this page
+          </h1>
+          <p className="text-lg text-gray-600">
+            Please contact the administrator for assistance.
+          </p>
+        </div>
+      </div>
+    ); // Return null to prevent rendering this component
+  }
+
 
   const toast = async () => {
     setshowToast(true);
@@ -32,6 +81,8 @@ function Registration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    closeModal(e);
 
     console.log("Form submitted with:", {
       studentName,
@@ -367,30 +418,6 @@ function Registration() {
               </div>
             </div>
 
-            {/* Reenrollment Field */}
-            <div className="w-full md:w-1/3 mb-2 md:mb-0">
-              <label
-                htmlFor="reenrollment"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Re Enrollment
-              </label>
-              <div className="w-full md:w-1/3 mb-2 md:mb-0 mr-10">
-              <button
-                id="classButton"
-                className={`relative inline-flex items-center h-[8vh] w-[18vw] justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 ${
-                  selectedClass ? "has-value" : ""
-                }`}
-                type="submit"
-                onClick={()=> router.push('/renroll')}
-              >
-                <span className="relative px-20 py-4 h-[7.5vh] w-[18vw] transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                  Click Here
-                </span>
-              </button>
-            </div>
-
-            </div>
           </div>
           <div className="mb-4 md:flex md:space-x-2">
             {/* Class Field */}
@@ -401,7 +428,7 @@ function Registration() {
                   selectedClass ? "has-value" : ""
                 }`}
                 type="submit"
-                onClick={handleSubmit}
+                onClick={openModal}
               >
                 <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Submit
@@ -413,31 +440,46 @@ function Registration() {
             <div className="w-full md:w-1/3 mb-2 md:mb-0">
               <button
                 id="subscriptionTypeButton"
-                onClick={()=>router.push('/edit')}
+                onClick={()=>router.push('/home')}
                 className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 ${
                   subscriptionType ? "has-value" : ""
                 }`}
                 type="button"
               >
                 <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                  Edit Data
+                  Go  Back
                 </span>
               </button>
             </div>
-            <div className="w-full md:w-1/3 mb-2 md:mb-0">
-              <button
-                id="subscriptionTypeButton"
-                onClick={()=>router.push('/')}
-                className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 ${
-                  subscriptionType ? "has-value" : ""
-                }`}
-                type="button"
-              >
-                <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                  Go Back
-                </span>
-              </button>
-            </div>
+            {isModalVisible && (
+        <Modal onClose={closeModal}>
+          <div className="p-6 text-center">
+            <svg
+              className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            ></svg>
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Are you sure you want to assign this mentor to Selected Students?
+            </h3>
+            <button
+            onClick={handleSubmit} // Call handleSubmit when "Yes, I'm sure" is clicked
+              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+            >
+              Yes, I'm sure
+            </button>
+            <button
+              onClick={closeModal} // Close the modal when "No, cancel" is clicked
+              className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+            >
+              No, cancel
+            </button>
+          </div>
+        </Modal>
+      )}
+
           </div>
         </form>
       </div>
@@ -455,10 +497,45 @@ function Registration() {
             onClose={() => setshowToast(false)}
           />
         )}
+
+
       </div>
     </>
   );
 }
+
+
+export async function getServerSideProps(context) {
+  try {
+    // Fetch data from your backend API on the server side
+    const response = await fetch(
+      "https://gp-backend-u5ty.onrender.com/api/mentorData/"
+    );
+    const data = await response.json();
+    const r = await fetch(
+      "https://gp-backend-u5ty.onrender.com/api/ownerData/"
+    );
+    const d = await r.json();
+
+    return {
+      props: {
+        data,
+        d,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: [],
+        d: [],
+      },
+    };
+  }
+}
+
+
+
 
 export default Registration;
 
