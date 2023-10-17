@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Toast from "@/components/Toast";
 import "react-datepicker/dist/react-datepicker.css";
 import Modal from "@/components/Modal";
+import { useRouter } from "next/router";
 
 // Define your API endpoint
 // Replace with your actual API endpoint
@@ -21,6 +22,7 @@ function Enroll({ data }) {
   const [sub, setSub] = useState("");
   const [date, setDate] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const router = useRouter();
 //   console.log(data);
 //   console.log(studentData);
   useEffect(() => {
@@ -225,6 +227,19 @@ function Enroll({ data }) {
           </div>
         </Modal>
       )}
+      <button
+        onClick={() => {
+          // Your button click handler here
+          router.push("/registration");
+        }}
+        className="fixed bottom-2 right-5"
+      >
+        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            Go Back
+          </span>
+        </span>
+      </button>
 
         </div>
       </form>

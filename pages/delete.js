@@ -86,7 +86,7 @@ function ParentComponent({ data,t }) {
   };
   // console.log(selectedIds);
 
-  const handleRefundClick = async () => {
+  const handleDeleteClick = async () => {
     try {
       // Send a request to your backend API to delete the selected rows
       const response = await fetch("https://gp-backend-u5ty.onrender.com/api/delete", {
@@ -98,7 +98,7 @@ function ParentComponent({ data,t }) {
       });
 
       if (response.ok) {
-        setMessage("Selected rows have been refunded successfully.");
+        setMessage("Selected rows have been Deleteed successfully.");
         // Clear the selected IDs and fetch updated data
         // setSelectedIds([]);
         const response1 = await fetch(
@@ -115,11 +115,11 @@ function ParentComponent({ data,t }) {
         setSelectedMentor("");
         setSelectedDate("");
       } else {
-        setMessage("Failed to refund selected rows.");
+        setMessage("Failed to Delete selected rows.");
       }
     } catch (error) {
-      console.error("Error refunding rows:", error);
-      setMessage("An error occurred while refunding rows.");
+      console.error("Error Deleteing rows:", error);
+      setMessage("An error occurred while Deleteing rows.");
     }
   };
   useEffect(() => {
@@ -166,7 +166,7 @@ function ParentComponent({ data,t }) {
       </Head>
       <div className="flex flex-col items-center bg-gray-700 w-screen h-[100vh] mt-0">
         <h1 className="text-white text-4xl font-'Roboto Slab' mt-3">
-          <b>Refund Page</b>
+          <b>Delete Page</b>
         </h1>
         <div>
           {/* Search Bar */}
@@ -220,12 +220,12 @@ function ParentComponent({ data,t }) {
         <div className="flex flex-col w-[80vw] h-[80vh] mt-6">
           <button
             onClick={()=>{
-              // handleRefundClick();
+              // handleDeleteClick();
               openModal();            }
             }
             className="px-4 py-2 mb-4 text-white bg-blue-500 rounded hover:bg-blue-600"
           >
-            Refund Selected
+            Delete Selected
           </button>
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -292,7 +292,7 @@ function ParentComponent({ data,t }) {
             </h3>
             <button
               onClick={() => {
-                handleRefundClick();
+                handleDeleteClick();
                 closeModal();
               }} // Call handleSubmit when "Yes, I'm sure" is clicked
               className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
@@ -311,7 +311,7 @@ function ParentComponent({ data,t }) {
       <button
         onClick={() => {
           // Your button click handler here
-          router.push("/home");
+          router.push("/registration");
         }}
         className="fixed bottom-2 right-5"
       >
