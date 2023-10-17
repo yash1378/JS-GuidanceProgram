@@ -102,15 +102,18 @@ function Student({data}) {
 
   return (
     <>
+    <body className="bg-gray-700 pt-1 ">
+      
+
       <div
-        className="mx-auto mt-8 p-4 rounded-lg bg-white dark:bg-gray-800"
+        className="mx-auto mt-8 p-4 rounded-lg bg-gray-800 dark:bg-gray-800"
         style={{ maxWidth: "60vw" }}
       >
         <form>
           <div className="mb-4">
             <label
               htmlFor="studentName"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Student Name
             </label>
@@ -127,7 +130,7 @@ function Student({data}) {
           <div className="mb-4">
             <label
               htmlFor="mentorName"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               New Mentor Name
             </label>
@@ -144,7 +147,7 @@ function Student({data}) {
           <div className="mb-4">
             <label
               htmlFor="studentEmail"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Student Email
             </label>
@@ -161,7 +164,7 @@ function Student({data}) {
           <div className="mb-4">
             <label
               htmlFor="phoneNumber"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Phone Number
             </label>
@@ -178,7 +181,7 @@ function Student({data}) {
           <div className="mb-4">
             <label
               htmlFor="selectedDate"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Date
             </label>
@@ -194,7 +197,7 @@ function Student({data}) {
           <div className="mb-4">
             <label
               htmlFor="selectedClass"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Class
             </label>
@@ -208,7 +211,7 @@ function Student({data}) {
               onChange={(e) => setSelectedClass(e.target.value)}
             />
           </div>
-          <div className="mb-4">
+          <span className="mb-4">
             <button
               // type="submit"
               onClick={openModal}
@@ -218,21 +221,18 @@ function Student({data}) {
                 Update Data
               </span>
             </button>
-          </div>
-          <div className="mb-4">
+          </span>
+          <span className="mb-4">
             <button
               type="button"
-              className={`text-white bg-blue-400 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
-                isButtonEnabled
-                  ? "bg-blue-400 dark:bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-600"
-                  : "opacity-50 cursor-not-allowed"
-              }`}
-              disabled={!isButtonEnabled}
+              className="text-white bg-blue-400 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+                 bg-blue-400 dark:bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-600"
+              // disabled={!isButtonEnabled}
               onClick={back}
             >
               Go Back
             </button>
-          </div>
+          </span>
           {isModalVisible && (
               <Modal onClose={closeModal}>
                 <div className="p-6 text-center">
@@ -255,15 +255,19 @@ function Student({data}) {
                   </button>
                   <button
                     onClick={closeModal} // Close the modal when "No, cancel" is clicked
-                    className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                    className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-white focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                   >
                     No, cancel
                   </button>
                 </div>
               </Modal>
             )}
-          <div
-            className="mx-auto mt-8 p-4 rounded-lg bg-white dark:bg-gray-800"
+
+        </form>
+
+      </div>
+      <div
+            className="mx-auto mt-8 p-4 rounded-lg bg-gray-700 dark:bg-gray-800"
             style={{ maxWidth: "60vw" }}
           >
             {showToast && (
@@ -274,8 +278,7 @@ function Student({data}) {
               />
             )}
           </div>
-        </form>
-      </div>
+      </body>
     </>
   );
 }

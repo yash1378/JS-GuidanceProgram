@@ -5,16 +5,39 @@ import Head from "next/head";
 import Cookies from "js-cookie";
 import { FaBars } from "react-icons/fa"; // Import the hamburger icon
 function DataPage({ data, d }) {
+
   const [totalStudents, setTotalStudents] = useState(0);
   const [activeStudents, setActiveStudents] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to control sidebar visibility
   const [final, setFinal] = useState([]);
   const [activeFilters, setActiveFilters] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [isSearchBoxEmpty, setIsSearchBoxEmpty] = useState(true);
 
   const [isAuthorized, setIsAuthorized] = useState(true);
 
   const router = useRouter();
   let filteredData = data;
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    const filteredNames = data.filter((student) =>
+      student.phone.toLowerCase().startsWith(value.toLowerCase())
+    );
+
+    setSearchText(value);
+    setSuggestions(filteredNames); // Update suggestions
+    setIsSearchBoxEmpty(value.trim() === '');
+  };
+  
+
+  const handleSuggestionClick = (student) => {
+    // Set the selected student's data in the final state
+    setFinal([student]);
+    // Clear the suggestions
+    setSuggestions([]);
+  };
+  
 
   useEffect(() => {
     const { mentorName, enddate, enrolled } = router.query; // Get the mentorName from query parameters
@@ -84,7 +107,7 @@ function DataPage({ data, d }) {
     if (isMatch.length === 0) {
       setIsAuthorized(false);
     }
-  }, [router.query]); // Add router.query to the dependency array
+  }, [router.query,searchText]); // Add router.query to the dependency array
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -93,6 +116,7 @@ function DataPage({ data, d }) {
   const closeSidebar = () => {
     setIsSidebarOpen(false); // Close the sidebar
   };
+
 
   console.log(final);
 
@@ -136,9 +160,6 @@ function DataPage({ data, d }) {
         />
       </div>
 
-
-
-
       {/* Background overlay */}
       {isSidebarOpen && (
         <div
@@ -147,7 +168,7 @@ function DataPage({ data, d }) {
         ></div>
       )}
 
-      <div className="flex">
+      <div className="flex ">
         {/* Sidebar */}
         <Sidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
         {/* Rest of your page content */}
@@ -155,16 +176,61 @@ function DataPage({ data, d }) {
            (rest of your page content)
         */}
       </div>
-      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0" >
-        <h1 className=" text-white text-4xl font-'Roboto Slab' mt-3">
+
+      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0">
+        <h1 className=" text-white text-2xl font-'Roboto Slab' mt-3">
           <b>Data Table</b>
         </h1>
-        <div className="flex flex-col w-[85vw] h-[85vh]  mt-6 " >
+        <div className="relative">
+        <label
+          htmlFor="default-search"
+          className="text-sm font-medium text-gray-900 sr-only dark:text-white"
+        >
+          Search
+        </label>
+        <input
+          type="search"
+          id="default-search"
+          className="block w-[84vw] h-[5vh] p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Search by Student Phone No..."
+          required
+          value={searchText}
+          onChange={handleSearchChange}
+        />
+            {searchText.length > 0 && (
+              <div             className="suggestions text-white absolute z-50 top-[6vh] w-[84vw] bg-gray-600" // Set a background color here
+              style={{ maxHeight: "20vh", overflowY: "auto", zIndex: 50 }} >
+                {suggestions.length > 0 && (
+                  <ul>
+                    {suggestions.map((student, index) => (
+                      <li
+                        className={`w-full 
+                ${
+                  index % 2 === 0 ? "bg-black bg-opacity-20" : ""
+                } hover:bg-indigo-600 hover:text-white
+              `}
+                        style={{ cursor: "pointer" }}
+                        key={student.name}
+                        onClick={() => {
+                          handleSuggestionClick(student);
+                          setSuggestions([]);
+                        }}
+                      >
+                        {student.name}&nbsp;&nbsp;-&nbsp;&nbsp;[Mentor:&nbsp;&nbsp;{student.mentor}]&nbsp;&nbsp;-&nbsp;&nbsp;PhoneNo:&nbsp;&nbsp;{student.phone}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+        </div>
+
+        <div className="flex flex-col w-[85vw] h-[85vh]  mt-6 ">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow-2xl overflow-hidden sm:rounded-lg">
                 <table className="min-w-full text-sm text-white sm:table">
-                  <thead className="bg-gray-800 text-xs uppercase font-medium">
+                  <thead className="bg-gray-800 text-xs uppercase font-medium" style={{ position: "sticky", top: "0" }}>
                     <tr>
                       <th
                         scope="col"
@@ -256,18 +322,17 @@ function DataPage({ data, d }) {
           <br />
           {/* <div className="border-solid border-2 border-indigo-600">Yash</div> */}
           <div className=" relative text-white mt-35 z-100 ml-0 ">
-          <div className="relative mb-5 font-bold text-2xl">
-            Total Students: {totalStudents}
-          </div>
-          <div className="relative mb-5 font-bold text-2xl">
-            Active Students (Last 30 Days): {activeStudents}
-          </div>
-          <div className="relative font-bold text-xl">
-            Active Filters: {activeFilters.join(", ")}
+            <div className="relative mb-5 font-bold text-2xl">
+              Total Students: {totalStudents}
+            </div>
+            <div className="relative mb-5 font-bold text-2xl">
+              Active Students (Last 30 Days): {activeStudents}
+            </div>
+            <div className="relative font-bold text-xl">
+              Active Filters: {activeFilters.join(", ")}
+            </div>
           </div>
         </div>
-        </div>
-
       </div>
       <button
         onClick={() => {
@@ -282,8 +347,6 @@ function DataPage({ data, d }) {
           </span>
         </span>
       </button>
-
-
 
       {/* </div> */}
     </>

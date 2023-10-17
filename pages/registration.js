@@ -174,6 +174,8 @@ function Registration({data,d}) {
 
   return (
     <>
+    <body className="min-h-screen  pt-4 bg-gray-700">
+
       {isSidebarOpen && (
         <div
           className=" fixed top-0 left-0 z-30 w-full h-full bg-black opacity-70 transition-opacity duration-300 ease-in-out"
@@ -206,13 +208,13 @@ function Registration({data,d}) {
       {/* Sliding sidebar */}
       <div
         id="drawer-navigation"
-        className="absolute top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
+        className="absolute top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-gray-900 dark:bg-gray-800"
         tabIndex="-1"
         aria-labelledby="drawer-navigation-label"
       >
         <h5
           id="drawer-navigation-label"
-          className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
+          className="text-base font-semibold text-white uppercase dark:text-gray-400"
         >
           Menu
         </h5>
@@ -220,7 +222,7 @@ function Registration({data,d}) {
           type="button"
           data-drawer-hide="drawer-navigation"
           aria-controls="drawer-navigation"
-          className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          className="text-white bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
           onClick={()=>{closeSidebar();setIsSidebarOpen(false);}}
         >
           <svg
@@ -240,13 +242,13 @@ function Registration({data,d}) {
         </button>
         <div className="py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
-            <li>
+            <li className="hover:bg-gray-800 ">
               <a
                 href="/delete"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-white rounded-lg "
               >
                 <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="w-5 h-5 text-gray-500 transition duration-75 hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -259,13 +261,13 @@ function Registration({data,d}) {
 
               </a>
             </li>
-            <li>
+            <li className="hover:bg-gray-800 ">
               <a
                 href="/renroll"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-white rounded-lg  "
               >
                 <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="w-5 h-5 text-gray-500 transition duration-75 hover:text-white "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -274,17 +276,17 @@ function Registration({data,d}) {
                   <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                 </svg>
-                <span className="ml-3">Re-Enroll Student</span>
+                <span className="ml-3 ">Re-Enroll Student</span>
 
               </a>
             </li>
-            <li>
+            <li className="hover:bg-gray-800 ">
               <a
                 href="/edit"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-white rounded-lg dark:text-white  dark:hover:bg-gray-700 "
               >
                 <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="w-5 h-5 text-gray-500 transition duration-75  hover:text-white "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -302,21 +304,21 @@ function Registration({data,d}) {
         </div>
       </div>
       <div
-        className="mx-auto  mt-8 p-4 rounded-lg bg-white dark:bg-gray-800"
+        className="mx-auto  mt-8 p-4 rounded-lg bg-gray-800 dark:bg-gray-800"
         style={{ maxWidth: "60vw", boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)" }}
       >
         <form>
           <div className="mb-4">
             <label
               htmlFor="studentName"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Student Name
             </label>
             <input
               type="text"
               id="studentName"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-white-400 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 studentName ? "has-value" : ""
               }`}
               placeholder="Enter your Name"
@@ -328,14 +330,14 @@ function Registration({data,d}) {
           <div className="mb-4">
             <label
               htmlFor="phoneNumber"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Phone Number
             </label>
             <input
               type="tel"
               id="phoneNumber"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900bg-white-400 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 phoneNumber ? "has-value" : ""
               }`}
               placeholder="Enter your Number"
@@ -347,14 +349,14 @@ function Registration({data,d}) {
           <div className="mb-4">
             <label
               htmlFor="studentEmail"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Student Email
             </label>
             <input
               type="email"
               id="studentEmail"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-white-400 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 studentEmail ? "has-value" : ""
               }`}
               placeholder="Enter your Email"
@@ -366,14 +368,14 @@ function Registration({data,d}) {
           <div className="mb-4">
             <label
               htmlFor="paymentDate"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Date of Mentor Assigned
             </label>
             <input
               type="date"
               id="paymentDate"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-white-400 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 paymentDate ? "has-value" : ""
               }`}
               value={paymentDate}
@@ -387,7 +389,7 @@ function Registration({data,d}) {
             <div className="w-full md:w-1/3 mb-2 md:mb-0">
               <label
                 htmlFor="selectedClass"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-white dark:text-white"
               >
                 Class
               </label>
@@ -476,7 +478,7 @@ function Registration({data,d}) {
             <div className="w-full md:w-1/3 mb-2 md:mb-0">
               <label
                 htmlFor="subscriptionType"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-white dark:text-white"
               >
                 Subscription Type
               </label>
@@ -627,7 +629,7 @@ function Registration({data,d}) {
         </form>
       </div>
       <div
-        className="mx-auto mt-8 p-4 rounded-lg bg-white dark:bg-gray-800"
+        className="mx-auto mt-8 p-4 rounded-lg bg-gray-700 dark:bg-gray-800"
         style={{ maxWidth: "60vw" }}
       >
         {/* Your form and dropdowns here */}
@@ -643,6 +645,7 @@ function Registration({data,d}) {
 
 
       </div>
+      </body>
     </>
   );
 }

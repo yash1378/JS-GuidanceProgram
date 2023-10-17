@@ -51,18 +51,6 @@ const DataPage = ({
 
   };
 
-  // const handleMentorSelect = (mentorName) => {
-  //   console.log(selectedMentor)
-  //   setSelectedMentor((prevMentor) => {
-  //     if (prevMentor === mentorName) {
-  //       return ""; // Set to an empty string if it's the same mentor
-  //     } else {
-  //       return mentorName;
-  //     }
-  //   });
-  //   console.log(selectedMentor)
-  // };
-  
 
   // Handle form submission
   const handleSubmit = async () => {
@@ -128,7 +116,7 @@ const DataPage = ({
 
   return (
     <>
-      <div className="flex">
+      <div className="flex bg-gray-700 w-screen min-h-screen ">
         <div className="w-1/2 pr-4">
           <div
             className="relative ml-5 mt-20 overflow-x-auto shadow-md sm:rounded-lg"
@@ -139,7 +127,7 @@ const DataPage = ({
               style={{ minWidth: "100%" }} // Ensure the table is at least as wide as the container
             >
               <thead
-                className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                className="text-x text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400"
                 style={{ position: "sticky", top: "0" }}
               >
                 <tr>
@@ -169,22 +157,22 @@ const DataPage = ({
                   .map((item, index) => (
                     <tr
                       key={item._id}
-                      className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                      className={index % 2 === 0 ? "bg-black bg-opacity-20" : ""}
                     >
-                      <td className="border px-6 py-4">
+                      <td className="px-6 py-4">
                         <input
                           type="checkbox"
                           checked={selectedRows.includes(item._id)}
                           onChange={() => toggleSelect(item._id)}
                         />
                       </td>
-                      <td className="border text-x text-black px-6 py-4">
+                      <td className="text-x text-white px-6 py-4">
                         {item.name}
                       </td>
-                      <td className="border px-6 py-4">{item.phone}</td>
-                      <td className="border px-6 py-4">{item.date}</td>
-                      <td className="border px-6 py-4">{item.sub}</td>
-                      <td className="border px-6 py-4">{item.class}</td>
+                      <td className="text-white px-6 py-4">{item.phone}</td>
+                      <td className="text-white px-6 py-4">{item.date}</td>
+                      <td className="text-white px-6 py-4">{item.sub}</td>
+                      <td className="text-white px-6 py-4">{item.class}</td>
                     </tr>
                   ))}
               </tbody>
@@ -202,7 +190,7 @@ const DataPage = ({
               style={{ minWidth: "100%" }} // Ensure the table is at least as wide as the container
             >
               <thead
-                className="text-x text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                className="text-x text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400"
                 style={{ position: "sticky", top: "0" }}
               >
                 <tr>
@@ -225,20 +213,20 @@ const DataPage = ({
                 {additionalData.map((item, index) => (
                   <tr
                     key={item._id}
-                    className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                    className={index % 2 === 0 ?  "bg-black bg-opacity-20" : ""}
                   >
-                    <td className="border text-x text-black px-6 py-4">
+                    <td className="text-white text-x text-black px-6 py-4">
                       {item.name}
                     </td>
-                    <td className="border px-6 py-4">{item.on}</td>
-                    <td className="border px-6 py-4">
+                    <td className="text-white px-6 py-4">{item.on}</td>
+                    <td className="text-white px-6 py-4">
                       {item.handle - item.on >= 1 ? ( // Check if the difference is greater than or equal to 1
                         item.handle - item.on
                       ) : (
                         <span>Not available</span> // Display a message if not available
                       )}
                     </td>
-                    <td className="border px-6 py-4">
+                    <td className="text-white px-6 py-4">
                       {item.handle - item.on < 1 ? ( // Check if the condition is met
                         <input
                           className="cursor-pointer"
@@ -262,7 +250,7 @@ const DataPage = ({
         </div>
       </div>
 
-      <div className="text-center mt-4">
+      <div className="text-center mt-[-4.5rem]">
         <button
           onClick={openModal}
           className="px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"

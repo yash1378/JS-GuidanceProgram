@@ -139,8 +139,9 @@ function Registration({ data }) {
 
   return (
     <>
+    <body className="bg-emerald-950 w-screen min-h-screen pt-4 dark:bg-gray-900">
       <div
-        className="mx-auto mt-8 p-4 rounded-lg bg-white dark:bg-gray-800"
+        className="mx-auto  p-4 rounded-lg bg-emerald-900 dark:bg-gray-800"
         style={{
           maxWidth: "60vw",
           boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",
@@ -150,13 +151,13 @@ function Registration({ data }) {
           <div className="mb-4">
             <label
               htmlFor="mentorSelect"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Select Mentor
             </label>
             <select
               id="mentorSelect"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600`}
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-emerald-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600`}
               value={selectedMentor}
               onChange={(e) => setSelectedMentor(e.target.value)}
               required
@@ -172,13 +173,13 @@ function Registration({ data }) {
           <div className="mb-4">
             <label
               htmlFor="studentCountSelect"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Number of Students
             </label>
             <select
               id="studentCountSelect"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600`}
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-emerald-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600`}
               value={selectedStudentCount}
               onChange={(e) => setSelectedStudentCount(e.target.value)}
               required
@@ -194,7 +195,7 @@ function Registration({ data }) {
           <div className="mb-4 flex justify-center">
             <button
               id="submitButton"
-              className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 ${
+              className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800${
                 selectedMentor && selectedStudentCount ? "has-value" : ""
               }`}
               type="submit"
@@ -209,9 +210,7 @@ function Registration({ data }) {
             <button
               id="subscriptionTypeButton"
               onClick={() => router.push("/home")}
-              className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 
-                  
-    `}
+              className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 `}
               type="button"
             >
               <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -253,7 +252,7 @@ function Registration({ data }) {
         </form>
       </div>
       <div
-        className="mx-auto mt-8 p-4 rounded-lg bg-white dark:bg-gray-800"
+        className="mx-auto mt-8 p-4 rounded-lg bg-emerald-950 dark:bg-gray-800"
         style={{ maxWidth: "60vw" }}
       >
         {showToast && (
@@ -264,6 +263,7 @@ function Registration({ data }) {
           />
         )}
       </div>
+    </body>
     </>
   );
 }

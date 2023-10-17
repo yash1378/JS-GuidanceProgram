@@ -9,6 +9,13 @@ import { FaBars } from "react-icons/fa";
 function Home({ data }) {
   const [isAuthorized, setIsAuthorized] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // The text to simulate typing
+  const typingText = "Hi Pratham, Here you can access the Designated Page";
+
+  // State to manage the displayed text
+  const [displayedText, setDisplayedText] = useState("");
+  const [textIndex, setTextIndex] = useState(0);
+
 
   useEffect(() => {
     const usernameCookie = Cookies.get("id");
@@ -17,7 +24,16 @@ function Home({ data }) {
     if (isMatch.length === 0) {
       setIsAuthorized(false);
     }
-  }, [data]);
+    // Simulate typing animation
+    if (textIndex < typingText.length) {
+      const timer = setTimeout(() => {
+        setDisplayedText(typingText.slice(0, textIndex + 1));
+        setTextIndex(textIndex + 1);
+      }, 100); // Adjust the typing speed as needed
+
+      return () => clearTimeout(timer);
+    }
+  }, [data , textIndex, typingText]);
 
   const toggleSidebar = () => {
     const sidebar = document.getElementById("drawer-navigation");
@@ -59,7 +75,7 @@ function Home({ data }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <b>Hi Pratham, Here you can access the Designated Page</b>
+          <b>{displayedText}</b>
         </h1>
 
         <div className={styles.buttonContainer}>

@@ -73,10 +73,11 @@ const LoginPage = ({ d, td }) => {
 
   return (
     <>
-      <div className="container mx-auto h-screen flex justify-center items-center ">
-        <div className="w-full max-w-xs">
-          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <h1 className="text-2xl font-bold mb-8 text-center">LOGIN</h1>
+  <div className="container mx-auto h-screen flex justify-center items-center bg-teal-950 ">
+    <div className="w-[70vw] h-[80vh] flex">
+      {/* Left Side: Form */}
+      <div className="bg-white shadow-4xl rounded px-8 pt-6 pb-8 mb-4  border-2 rounded-3xl  w-[30vw] h-[80vh]">
+        <h1 className="text-2xl font-bold mb-8 text-center">LOGIN</h1>
             <form>
               <div className="mb-4">
                 <label
@@ -154,6 +155,10 @@ const LoginPage = ({ d, td }) => {
               )}
             </div>
           </div>
+          <div className="w-[40vw] h-[70vh]">
+          <img src="https://i.ibb.co/FBYscr3/profile.jpg" style={{maxWidth:"100%",height:"79.8vh",borderRadius:"20px"}}
+          alt="profile" border="0" />
+      </div>
         </div>
       </div>
 
