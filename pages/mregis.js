@@ -115,7 +115,7 @@ function MentorInputForm() {
             <input
               type="text"
               id="mentorName"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-white bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 mentorName ? "has-value" : ""
               }`}
               placeholder="Enter Mentor's Name"
@@ -134,7 +134,7 @@ function MentorInputForm() {
             <input
               type="tel"
               id="mentorPhoneNumber"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-white bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 mentorPhoneNumber ? "has-value" : ""
               }`}
               placeholder="Enter Mentor's Phone Number"
@@ -153,7 +153,7 @@ function MentorInputForm() {
             <input
               type="text"
               id="email"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-white bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 email ? "has-value" : ""
               }`}
               placeholder="Enter Mentor's Email"
@@ -173,7 +173,7 @@ function MentorInputForm() {
             <input
               type="password"
               id="password"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-white bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 password ? "has-value" : ""
               }`}
               placeholder="Enter Mentor's Password"
@@ -192,7 +192,7 @@ function MentorInputForm() {
             <input
               type="text"
               id="mentorCollegeName"
-              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-white bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+              className={`block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-amber-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
                 mentorCollegeName ? "has-value" : ""
               }`}
               placeholder="Enter Mentor's College Name"
