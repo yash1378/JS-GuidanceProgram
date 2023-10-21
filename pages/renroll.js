@@ -16,7 +16,7 @@ function Enroll({ data }) {
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
   const [showToast, setshowToast] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(0);
   const [email, setEmail] = useState("");
   const [classs, setClasss] = useState("");
   const [sub, setSub] = useState("");
@@ -73,6 +73,7 @@ function Enroll({ data }) {
     closeModal(e);
     try {
       // Send data to the backend API
+
       const response = await fetch(
         "https://gp-backend-u5ty.onrender.com/renrollment/",
         {
@@ -154,7 +155,9 @@ function Enroll({ data }) {
               <div className="suggestions text-white">
                 {suggestions.length > 0 && (
                   <ul>
-                    {suggestions.map((student, index) => (
+                    {suggestions
+                    .filter((student) => student.mentor !== "") // Filter students with a non-empty mentor
+                    .map((student, index) => (
                       <li
                         className={`
                 ${
