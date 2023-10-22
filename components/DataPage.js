@@ -117,6 +117,8 @@ const DataPage = ({
   return (
     <>
       <div className="flex bg-gray-700 w-screen min-h-screen ">
+
+
         <div className="w-1/2 pr-4">
           <div
             className="relative ml-5 mt-20 overflow-x-auto shadow-md sm:rounded-lg"

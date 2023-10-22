@@ -21,8 +21,10 @@ function DataPage({ data, d }) {
   let filteredData = data;
   const handleSearchChange = (e) => {
     const value = e.target.value;
-    const filteredNames = data.filter((student) =>
-      student.phone.toLowerCase().startsWith(value.toLowerCase())
+    const filteredNames = data.filter(
+      (student, index, self) =>
+        student.phone.toLowerCase().startsWith(value.toLowerCase()) &&
+        index === self.findIndex((s) => s.phone === student.phone)
     );
 
     setSearchText(value);
@@ -178,7 +180,7 @@ function DataPage({ data, d }) {
       </div>
 
       <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0">
-        <h1 className=" text-white text-2xl font-'Roboto Slab' mt-3">
+        <h1 className=" text-white text-2xl font-'Roboto Slab' mt-1.5 mb-1.5">
           <b>Data Table</b>
         </h1>
         <div className="relative">
@@ -191,7 +193,7 @@ function DataPage({ data, d }) {
         <input
           type="search"
           id="default-search"
-          className="block w-[84vw] h-[5vh] p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block w-[84vw] h-[6vh] p-4 pl-9 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search by Student Phone No..."
           required
           value={searchText}
@@ -225,7 +227,7 @@ function DataPage({ data, d }) {
             )}
         </div>
 
-        <div className="flex flex-col w-[85vw] h-[85vh]  mt-6 ">
+        <div className="flex flex-col w-[85vw] h-[85vh]  mt-3 ">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow-2xl overflow-hidden sm:rounded-lg">

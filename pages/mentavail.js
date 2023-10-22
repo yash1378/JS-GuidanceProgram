@@ -165,7 +165,7 @@ function Registration({ data }) {
               <option value="">Select Mentor</option>
               {mentors.map((mentor) => (
                 <option key={mentor} value={mentor}>
-                  {mentor}
+                  {mentor}- can handle {total}
                 </option>
               ))}
             </select>

@@ -45,12 +45,15 @@ function Enroll({ data }) {
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
-    const filteredNames = studentData.filter((student) =>
-      student.phone.toLowerCase().startsWith(value.toLowerCase())
-    );
-
+    const filteredNames = studentData
+      .filter(
+        (student, index, self) =>
+          student.phone.toLowerCase().startsWith(value.toLowerCase()) &&
+          index === self.findIndex((s) => s.phone === student.phone)
+      );
+  
     setSearchText(value);
-    setSuggestions(filteredNames); // Update suggestions
+    setSuggestions(filteredNames);
   };
 
   const handleSuggestionClick = (student) => {

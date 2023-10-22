@@ -44,14 +44,15 @@ function ParentComponent({ data,t }) {
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
-    console.log(value)
-    console.log(studentData)
-    const filteredNames = studentData.filter((student) =>
-      student.phone.toLowerCase().startsWith(value.toLowerCase())
-    );
-
+    const filteredNames = studentData
+      .filter(
+        (student, index, self) =>
+          student.phone.toLowerCase().startsWith(value.toLowerCase()) &&
+          index === self.findIndex((s) => s.phone === student.phone)
+      );
+  
     setSearchText(value);
-    setSuggestions(filteredNames); // Update suggestions
+    setSuggestions(filteredNames);
   };
 
 
@@ -164,8 +165,8 @@ function ParentComponent({ data,t }) {
       <Head>
         <title>Your Page Title</title>
       </Head>
-      <div className="flex flex-col items-center bg-gray-700 w-screen h-[100vh] mt-0">
-        <h1 className="text-white text-4xl font-'Roboto Slab' mt-3">
+      <div className="flex flex-col items-center bg-gray-700 w-screen min-h-screen mt-0">
+        <h1 className="text-white text-4xl font-'Roboto Slab' mt-1">
           <b>Delete Page</b>
         </h1>
         <div>
@@ -177,13 +178,13 @@ function ParentComponent({ data,t }) {
             Search
           </label>
           <div
-            className="relative mt-5 w-[80vw] mx-auto"
+            className="relative mt-3 w-[80vw] mx-auto"
             style={{ position: "sticky", top: "0" }}
           >
             <input
               type="search"
               id="default-search"
-              className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block w-[79vw] p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search Student by Phone No..."
               required
               value={searchText}
@@ -207,7 +208,7 @@ function ParentComponent({ data,t }) {
                           setSuggestions([]);
                         }}
                       >
-                        {student.name} - Mentor: {student.mentor}
+                        {student.name} - <b> Mentor:</b> {student.mentor}
                       </li>
                     ))}
                   </ul>
@@ -217,17 +218,17 @@ function ParentComponent({ data,t }) {
           </div>
           {/* End of Search Bar */}
         </div>
-        <div className="flex flex-col w-[80vw] h-[80vh] mt-6">
+        <div className="flex flex-col w-[80vw] h-[75vh] mt-4">
           <button
             onClick={()=>{
               // handleDeleteClick();
               openModal();            }
             }
-            className="px-4 py-2 mb-4 text-white bg-blue-500 rounded hover:bg-blue-600"
+            className="px-4 py-2  mb-4 text-white w-[79vw] bg-blue-500 rounded hover:bg-blue-600"
           >
             Delete Selected
           </button>
-          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="my-1 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow-2xl overflow-hidden sm:rounded-lg">
                 <table className="min-w-full text-sm text-white sm:table">

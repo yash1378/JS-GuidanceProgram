@@ -41,7 +41,7 @@ function DataPage({ data, d }) {
 
   return (
     <>
-      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0" >
+      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0 zIndex-2" >
         <h1 className=" text-white text-4xl font-'Roboto Slab' mt-3">
           <b>Mentor Data </b>
         </h1>
@@ -50,7 +50,7 @@ function DataPage({ data, d }) {
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow-2xl overflow-hidden sm:rounded-lg">
                 <table className="min-w-full text-sm text-white sm:table">
-                  <thead className="bg-gray-800 text-xs uppercase font-medium">
+                  <thead className="bg-gray-800 text-xs uppercase font-medium"  style={{ position: "sticky", top: "0", zIndex: "2" }}>
                     <tr>
                       <th
                         scope="col"
