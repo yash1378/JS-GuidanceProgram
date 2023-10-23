@@ -5,7 +5,6 @@ import Head from "next/head";
 import Cookies from "js-cookie";
 import { FaBars } from "react-icons/fa"; // Import the hamburger icon
 function DataPage({ data, d }) {
-
   const [totalStudents, setTotalStudents] = useState(0);
   const [activeStudents, setActiveStudents] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to control sidebar visibility
@@ -29,9 +28,8 @@ function DataPage({ data, d }) {
 
     setSearchText(value);
     setSuggestions(filteredNames); // Update suggestions
-    setIsSearchBoxEmpty(value.trim() === '');
+    setIsSearchBoxEmpty(value.trim() === "");
   };
-  
 
   const handleSuggestionClick = (student) => {
     // Set the selected student's data in the final state
@@ -39,7 +37,6 @@ function DataPage({ data, d }) {
     // Clear the suggestions
     setSuggestions([]);
   };
-  
 
   useEffect(() => {
     const { mentorName, enddate, enrolled } = router.query; // Get the mentorName from query parameters
@@ -109,7 +106,7 @@ function DataPage({ data, d }) {
     if (isMatch.length === 0) {
       setIsAuthorized(false);
     }
-  }, [router.query,searchText]); // Add router.query to the dependency array
+  }, [router.query, searchText]); // Add router.query to the dependency array
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -118,7 +115,6 @@ function DataPage({ data, d }) {
   const closeSidebar = () => {
     setIsSidebarOpen(false); // Close the sidebar
   };
-
 
   console.log(final);
 
@@ -129,6 +125,13 @@ function DataPage({ data, d }) {
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <Head>
           <title>Access Denied</title>
+          {/* <link href="https://fonts.googleapis.com/css2?family=Your+Font:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/> */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@700&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <div className="text-center">
           <h1 className="text-4xl font-semibold text-gray-800 mb-4">
@@ -180,107 +183,119 @@ function DataPage({ data, d }) {
       </div>
 
       <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0">
-        <h1 className=" text-white text-2xl font-'Roboto Slab' mt-1.5 mb-1.5">
+        <h1
+          className=" text-white text-2xl font-Damion-cursive mt-1.5 mb-1.5"
+          // style={{ fontFamily: "Averia Sans Libre, sans-serif" }}
+        >
           <b>Data Table</b>
         </h1>
         <div className="relative">
-        <label
-          htmlFor="default-search"
-          className="text-sm font-medium text-gray-900 sr-only dark:text-white"
-        >
-          Search
-        </label>
-        <input
-          type="search"
-          id="default-search"
-          className="block w-[84vw] h-[6vh] p-4 pl-9 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Search by Student Phone No..."
-          required
-          value={searchText}
-          onChange={handleSearchChange}
-        />
-            {searchText.length > 0 && (
-              <div             className="suggestions text-white absolute z-50 top-[6vh] w-[84vw] bg-gray-600" // Set a background color here
-              style={{ maxHeight: "20vh", overflowY: "auto", zIndex: 50 }} >
-                {suggestions.length > 0 && (
-                  <ul>
-                    {suggestions.map((student, index) => (
-                      <li
-                        className={`w-full 
+          <label
+            htmlFor="default-search"
+            className="text-sm font-medium text-gray-900 sr-only dark:text-white"
+          >
+            Search
+          </label>
+          <input
+            type="search"
+            id="default-search"
+            className="block w-[84vw] h-[6vh] p-4 pl-9 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Search by Student Phone No..."
+            required
+            value={searchText}
+            onChange={handleSearchChange}
+          />
+          {searchText.length > 0 && (
+            <div
+              className="suggestions text-white absolute z-50 top-[6vh] w-[84vw] bg-gray-600" // Set a background color here
+              style={{ maxHeight: "20vh", overflowY: "auto", zIndex: 50 }}
+            >
+              {suggestions.length > 0 && (
+                <ul>
+                  {suggestions.map((student, index) => (
+                    <li
+                      className={`w-full 
                 ${
                   index % 2 === 0 ? "bg-black bg-opacity-20" : ""
                 } hover:bg-indigo-600 hover:text-white
               `}
-                        style={{ cursor: "pointer" }}
-                        key={student.name}
-                        onClick={() => {
-                          handleSuggestionClick(student);
-                          setSuggestions([]);
-                        }}
-                      >
-                        {student.name}&nbsp;&nbsp;-&nbsp;&nbsp;[Mentor:&nbsp;&nbsp;{student.mentor}]&nbsp;&nbsp;-&nbsp;&nbsp;PhoneNo:&nbsp;&nbsp;{student.phone}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
+                      style={{ cursor: "pointer" }}
+                      key={student.name}
+                      onClick={() => {
+                        handleSuggestionClick(student);
+                        setSuggestions([]);
+                      }}
+                    >
+                      {student.name}
+                      &nbsp;&nbsp;-&nbsp;&nbsp;[Mentor:&nbsp;&nbsp;
+                      {student.mentor}
+                      ]&nbsp;&nbsp;-&nbsp;&nbsp;PhoneNo:&nbsp;&nbsp;
+                      {student.phone}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
         </div>
 
-        <div className="flex flex-col w-[85vw] h-[85vh]  mt-3 ">
-          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+        <div className="flex flex-col w-[85vw] h-[85vh]  mt-4 ">
+          <div className=" overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className=" align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow-2xl overflow-hidden sm:rounded-lg">
                 <table className="min-w-full text-sm text-white sm:table">
-                  <thead className="bg-gray-800 text-xs uppercase font-medium" style={{ position: "sticky", top: "0" }}>
+                  <thead
+                    className="bg-gray-800 text-sm uppercase font-mono"
+                    style={{ position: "sticky", top: "0" }}
+                  >
                     <tr>
                       <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                        No.
+                       <i><b>No.</b> </i>
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                        Student Name
+                        <i><b>Student Name</b></i>
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                        Enrollment Date
+                        <i><b>Enrollment Date</b></i>
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                        Mobile.No
+                        <i><b>Mobile.No</b></i>
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                        Mentor Name
+                        <i><b>Mentor Name</b></i>
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                        Sub Type
+                        <i><b>Sub Type</b></i>
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                        Class
+                        <i><b>Class</b></i>
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                        Email
+                        <i><b>Email</b></i>
                       </th>
                     </tr>
                   </thead>
@@ -288,30 +303,30 @@ function DataPage({ data, d }) {
                     {final.map((item, index) => (
                       <tr
                         key={item._id}
-                        className={
-                          index % 2 === 0 ? "bg-black bg-opacity-20" : ""
+                        className={`text-base
+                          ${index % 2 === 0 ? "bg-black bg-opacity-20" : ""}`
                         }
                       >
                         <td className="pl-4">{index + 1}</td>
-                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                        <td className="px-6 py-2 text-base font-mono text-left sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.name}</span>
                         </td>
-                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                        <td className="px-6 py-2 text-base font-mono text-left sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.date}</span>
                         </td>
-                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                        <td className="px-6 py-2 text-base font-mono  sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.phone}</span>
                         </td>
-                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                        <td className="px-6 py-2 text-base font-mono  sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.mentor}</span>
                         </td>
-                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                        <td className="px-6 py-2 text-base font-mono  sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.sub}</span>
                         </td>
-                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                        <td className="px-6 py-2  text-base font-mono  sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.class}</span>
                         </td>
-                        <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
+                        <td className="px-6 py-2 text-base font-mono sm:py-4 sm:px-2 whitespace-nowrap">
                           <span className="sm:block">{item.email}</span>
                         </td>
                       </tr>
@@ -324,13 +339,13 @@ function DataPage({ data, d }) {
           <br />
           {/* <div className="border-solid border-2 border-indigo-600">Yash</div> */}
           <div className=" relative text-white mt-35 z-100 ml-0 ">
-            <div className="relative mb-5 font-bold text-2xl">
+            <div className="relative mb-5 font-Damion-cursive text-2xl">
               Total Students: {totalStudents}
             </div>
-            <div className="relative mb-5 font-bold text-2xl">
+            <div className="relative mb-5 font-Damion-cursive text-2xl">
               Active Students (Last 30 Days): {activeStudents}
             </div>
-            <div className="relative font-bold text-xl">
+            <div className="relative font-Damion-cursive text-xl">
               Active Filters: {activeFilters.join(", ")}
             </div>
           </div>
@@ -343,8 +358,8 @@ function DataPage({ data, d }) {
         }}
         className="fixed bottom-6 right-12"
       >
-        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-black dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
             Go Back
           </span>
         </span>

@@ -73,7 +73,7 @@ function Home({ data }) {
       </Head>
 
 
-      <main className={styles.main}>
+      <main className={`font-Damion-cursive ${styles.main}`}>
         <h1 className={styles.title}>
           <b>{displayedText}</b>
         </h1>

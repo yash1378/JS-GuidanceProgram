@@ -37,20 +37,16 @@ const DataPage = ({
   };
 
   // Handle mentor selection
-  const handleMentorSelect =(mentorName) => {
-    console.log(selectedMentor)
-    console.log(mentorName)
-    if(selectedMentor === mentorName){
+  const handleMentorSelect = (mentorName) => {
+    console.log(selectedMentor);
+    console.log(mentorName);
+    if (selectedMentor === mentorName) {
       setSelectedMentor("");
-    }
-    else{
+    } else {
       setSelectedMentor(mentorName);
     }
     console.log(selectedMentor);
-
-
   };
-
 
   // Handle form submission
   const handleSubmit = async () => {
@@ -117,8 +113,6 @@ const DataPage = ({
   return (
     <>
       <div className="flex bg-gray-700 w-screen min-h-screen ">
-
-
         <div className="w-1/2 pr-4">
           <div
             className="relative ml-5 mt-20 overflow-x-auto shadow-md sm:rounded-lg"
@@ -129,7 +123,7 @@ const DataPage = ({
               style={{ minWidth: "100%" }} // Ensure the table is at least as wide as the container
             >
               <thead
-                className="text-x text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400"
+                className="text-x text-white uppercase font-Damion-cursive bg-gray-800 dark:bg-gray-700 dark:text-gray-400"
                 style={{ position: "sticky", top: "0" }}
               >
                 <tr>
@@ -153,13 +147,15 @@ const DataPage = ({
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="font-Damion-cursive">
                 {data
                   .filter((item) => item.mentor === "") // Filter by mentor name being empty
                   .map((item, index) => (
                     <tr
                       key={item._id}
-                      className={index % 2 === 0 ? "bg-black bg-opacity-20" : ""}
+                      className={
+                        index % 2 === 0 ? "bg-black bg-opacity-20" : ""
+                      }
                     >
                       <td className="px-6 py-4">
                         <input
@@ -192,7 +188,7 @@ const DataPage = ({
               style={{ minWidth: "100%" }} // Ensure the table is at least as wide as the container
             >
               <thead
-                className="text-x text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400"
+                className="text-x text-white font-Damion-cursive uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400"
                 style={{ position: "sticky", top: "0" }}
               >
                 <tr>
@@ -211,11 +207,11 @@ const DataPage = ({
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="font-Damion-cursive text-base">
                 {additionalData.map((item, index) => (
                   <tr
                     key={item._id}
-                    className={index % 2 === 0 ?  "bg-black bg-opacity-20" : ""}
+                    className={index % 2 === 0 ? "bg-black bg-opacity-20" : ""}
                   >
                     <td className="text-white text-x text-black px-6 py-4">
                       {item.name}
@@ -255,7 +251,7 @@ const DataPage = ({
       <div className="text-center mt-[-4.5rem]">
         <button
           onClick={openModal}
-          className="px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+          className="px-4 py-2 font-Damion-cursive text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
         >
           Submit
         </button>
@@ -267,7 +263,7 @@ const DataPage = ({
         }}
         className="fixed bottom-6 right-12"
       >
-        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-Damion-cursive text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
           <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
             Go Back
           </span>
@@ -275,35 +271,42 @@ const DataPage = ({
       </button>
       {/* Modal */}
       {isModalVisible && (
-        <Modal onClose={closeModal}>
-          <div className="p-6 text-center">
-            <svg
-              className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            ></svg>
-            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to assign this mentor to Selected Students?
-            </h3>
-            <button
-              onClick={() => {
-                handleSubmit();
-                closeModal();
-              }} // Call handleSubmit when "Yes, I'm sure" is clicked
-              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-            >
-              Yes, I'm sure
-            </button>
-            <button
-              onClick={closeModal} // Close the modal when "No, cancel" is clicked
-              className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-            >
-              No, cancel
-            </button>
-          </div>
-        </Modal>
+        <>
+          <div
+            className=" fixed top-0 left-0 z-10 w-full h-full bg-black opacity-70 transition-opacity duration-300 ease-in-out"
+            onClick={closeModal} // Close the sidebar when overlay is clicked
+          ></div>
+          <Modal onClose={closeModal}>
+            <div className="p-6 text-center">
+              <svg
+                className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              ></svg>
+              <h3 className="mb-5 text-lg font-normal text-gray-900 dark:text-gray-400">
+                Are you sure you want to assign this mentor to Selected
+                Students?
+              </h3>
+              <button
+                onClick={() => {
+                  handleSubmit();
+                  closeModal();
+                }} // Call handleSubmit when "Yes, I'm sure" is clicked
+                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-Damion-cursive rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+              >
+                Yes, I'm sure
+              </button>
+              <button
+                onClick={closeModal} // Close the modal when "No, cancel" is clicked
+                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-Damion-cursive px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+              >
+                No, cancel
+              </button>
+            </div>
+          </Modal>
+        </>
       )}
     </>
   );

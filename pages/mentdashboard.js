@@ -50,7 +50,7 @@ function DataPage({ data, d }) {
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow-2xl overflow-hidden sm:rounded-lg">
                 <table className="min-w-full text-sm text-white sm:table">
-                  <thead className="bg-gray-800 text-xs uppercase font-medium"  style={{ position: "sticky", top: "0", zIndex: "2" }}>
+                  <thead className="bg-gray-800 text-sm uppercase font-Damion-cursive"  style={{ position: "sticky", top: "0", zIndex: "2" }}>
                     <tr>
                       <th
                         scope="col"
@@ -84,7 +84,7 @@ function DataPage({ data, d }) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-gray-800">
+                  <tbody className="bg-gray-800 text-base font-Damion-cursive">
                     {data.map((item, index) => (
                       <tr
                         key={item._id}
@@ -121,8 +121,8 @@ function DataPage({ data, d }) {
         }}
         className="fixed bottom-6 right-3"
       >
-        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-Damion-cursive text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-black dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
             Go Back
           </span>
         </span>

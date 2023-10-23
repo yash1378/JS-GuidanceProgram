@@ -122,7 +122,7 @@ function Student({ data }) {
             <div className="mb-4">
               <label
                 htmlFor="studentName"
-                className="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-Damion-cursive text-white dark:text-white"
               >
                 Student Name
               </label>
@@ -130,7 +130,7 @@ function Student({ data }) {
                 type="text"
                 id="studentName"
                 name="studentName"
-                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm font-Damion-cursive text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder="Enter Student's Name"
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
@@ -139,7 +139,7 @@ function Student({ data }) {
             <div className="mb-4">
               <label
                 htmlFor="mentorName"
-                className="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-Damion-cursive text-white dark:text-white"
               >
                 New Mentor Name
               </label>
@@ -147,7 +147,7 @@ function Student({ data }) {
                 type="text"
                 id="mentorName"
                 name="mentorName"
-                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full font-Damion-cursive text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder="Enter Mentor's Name"
                 value={newmentor}
                 onChange={(e) => setNewMentor(e.target.value)}
@@ -156,7 +156,7 @@ function Student({ data }) {
             <div className="mb-4">
               <label
                 htmlFor="studentEmail"
-                className="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-Damion-cursive text-white dark:text-white"
               >
                 Student Email
               </label>
@@ -164,7 +164,7 @@ function Student({ data }) {
                 type="email"
                 id="studentEmail"
                 name="studentEmail"
-                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm font-Damion-cursive text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder="Enter Student's Email"
                 value={studentEmail}
                 onChange={(e) => setStudentEmail(e.target.value)}
@@ -173,7 +173,7 @@ function Student({ data }) {
             <div className="mb-4">
               <label
                 htmlFor="phoneNumber"
-                className="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-Damion-cursive text-white dark:text-white"
               >
                 Phone Number
               </label>
@@ -181,7 +181,7 @@ function Student({ data }) {
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
-                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm font-Damion-cursive text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder="Enter Phone Number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -190,7 +190,7 @@ function Student({ data }) {
             <div className="mb-4">
               <label
                 htmlFor="selectedDate"
-                className="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-Damion-cursive text-white dark:text-white"
               >
                 Date
               </label>
@@ -198,7 +198,7 @@ function Student({ data }) {
                 type="date"
                 id="selectedDate"
                 name="selectedDate"
-                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm font-Damion-cursive text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
               />
@@ -206,7 +206,7 @@ function Student({ data }) {
             <div className="mb-4">
               <label
                 htmlFor="selectedClass"
-                className="block mb-2 text-sm font-medium text-white dark:text-white"
+                className="block mb-2 text-sm font-Damion-cursive text-white dark:text-white"
               >
                 Class
               </label>
@@ -214,7 +214,7 @@ function Student({ data }) {
                 type="text"
                 id="selectedClass"
                 name="selectedClass"
-                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm font-Damion-cursive text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder="Enter Class"
                 value={selectedClass}
                 onChange={(e) => setSelectedClass(e.target.value)}
@@ -224,9 +224,9 @@ function Student({ data }) {
               <button
                 // type="submit"
                 onClick={openModal}
-                className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+                className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-Damion-cursive text-white rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
               >
-                <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-black dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Update Data
                 </span>
               </button>
@@ -234,7 +234,7 @@ function Student({ data }) {
             <span className="mb-4">
               <button
                 type="button"
-                className="text-white bg-blue-400 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+                className="text-white bg-blue-400 dark:bg-blue-500 font-Damion-cursive rounded-lg text-sm px-5 py-2.5 text-center 
                  bg-blue-400 dark:bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-600"
                 // disabled={!isButtonEnabled}
                 onClick={back}
@@ -243,6 +243,11 @@ function Student({ data }) {
               </button>
             </span>
             {isModalVisible && (
+              <>
+                <div
+                  className=" fixed top-0 left-0 z-10 w-full h-full bg-black opacity-70 transition-opacity duration-300 ease-in-out"
+                  onClick={closeModal} // Close the sidebar when overlay is clicked
+                ></div>
               <Modal onClose={closeModal}>
                 <div className="p-6 text-center">
                   <svg
@@ -252,24 +257,24 @@ function Student({ data }) {
                     fill="none"
                     viewBox="0 0 20 20"
                   ></svg>
-                  <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    Are you sure you want to assign this mentor to Selected
-                    Students?
+                  <h3 className="mb-5 text-lg font-normal text-gray-900 dark:text-gray-400">
+                    Are you sure you want to confirm this edit ?
                   </h3>
                   <button
                     onClick={handleEditSubmit} // Call handleSubmit when "Yes, I'm sure" is clicked
-                    className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                    className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-Damion-cursive rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                   >
                     Yes, I'm sure
                   </button>
                   <button
                     onClick={closeModal} // Close the modal when "No, cancel" is clicked
-                    className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-white focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                    className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-Damion-cursive px-5 py-2.5 hover:text-black focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                   >
                     No, cancel
                   </button>
                 </div>
               </Modal>
+              </>
             )}
           </form>
         </div>

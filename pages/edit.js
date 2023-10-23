@@ -12,9 +12,7 @@ function PhoneNumberInputPage({ data }) {
   const isValidPhoneNumber =searchText.length === 10;
   const [isAlertVisible, setIsAlertVisible] = useState(true);
 
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
-  };
+
   const goBack = () => {
     router.push("/registration");
   };

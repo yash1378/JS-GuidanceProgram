@@ -12,7 +12,16 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        'sans': ['Averia Sans Libre', 'sans'],
+        'Damion-cursive': ['Damion','cursive'],
+        'Tienne-serif':['Tienne', 'serif'],
+        'mono':['Monofett','cursive'],
+        'sedwick-cursive':[ 'Sedgwick Ave', 'cursive'],
+      },
     },
   },
+  variants: {},
+
   plugins: [],
 }

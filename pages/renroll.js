@@ -23,8 +23,8 @@ function Enroll({ data }) {
   const [date, setDate] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
-//   console.log(data);
-//   console.log(studentData);
+  //   console.log(data);
+  //   console.log(studentData);
   useEffect(() => {
     // Fetch data from the API and set it to studentData
     // ...
@@ -42,16 +42,14 @@ function Enroll({ data }) {
     setIsModalVisible(false);
   };
 
-
   const handleSearchChange = (e) => {
     const value = e.target.value;
-    const filteredNames = studentData
-      .filter(
-        (student, index, self) =>
-          student.phone.toLowerCase().startsWith(value.toLowerCase()) &&
-          index === self.findIndex((s) => s.phone === student.phone)
-      );
-  
+    const filteredNames = studentData.filter(
+      (student, index, self) =>
+        student.phone.toLowerCase().startsWith(value.toLowerCase()) &&
+        index === self.findIndex((s) => s.phone === student.phone)
+    );
+
     setSearchText(value);
     setSuggestions(filteredNames);
   };
@@ -65,13 +63,12 @@ function Enroll({ data }) {
     setClasss(student.class);
     setSub(student.sub);
     setDate(student.date);
-    
+
     // setSuggestions([]); // Clear suggestions
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
 
     closeModal(e);
     try {
@@ -129,15 +126,15 @@ function Enroll({ data }) {
 
   return (
     <div className="bg-gray-700 w-screen min-h-screen  overflow-hidden">
-      <h1 className="relative py-7 w-[100vw] text-center text-4xl text-white  mx-auto">
+      <h1 className="relative py-7 w-[100vw] text-center text-4xl text-white  font-Damion-cursive mx-auto">
         <b> Type the Name of the Student to Search</b>
       </h1>
-      <form  className="flex flex-wrap justify-center">
+      <form className="flex flex-wrap justify-center">
         <div>
           {/* Search Bar */}
           <label
             htmlFor="default-search"
-            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+            className="mb-2 text-sm font-Damion-cursive text-gray-900 sr-only dark:text-white"
           >
             Search
           </label>
@@ -148,7 +145,7 @@ function Enroll({ data }) {
             <input
               type="search"
               id="default-search"
-              className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block w-full p-4 pl-10 text-base text-gray-900 font-Damion-cursive border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search Student by PhoneNo..."
               required
               value={searchText}
@@ -159,24 +156,24 @@ function Enroll({ data }) {
                 {suggestions.length > 0 && (
                   <ul>
                     {suggestions
-                    .filter((student) => student.mentor !== "") // Filter students with a non-empty mentor
-                    .map((student, index) => (
-                      <li
-                        className={`
+                      .filter((student) => student.mentor !== "") // Filter students with a non-empty mentor
+                      .map((student, index) => (
+                        <li
+                          className={`
                 ${
                   index % 2 === 0 ? "bg-black bg-opacity-20" : ""
                 } hover:bg-indigo-600 hover:text-white
               `}
-                        style={{ cursor: "pointer" }}
-                        key={student.name}
-                        onClick={() => {
-                          handleSuggestionClick(student);
-                          setSuggestions([]);
-                        }}
-                      >
-                        {student.name} - Mentor: {student.mentor}
-                      </li>
-                    ))}
+                          style={{ cursor: "pointer" }}
+                          key={student.name}
+                          onClick={() => {
+                            handleSuggestionClick(student);
+                            setSuggestions([]);
+                          }}
+                        >
+                          {student.name} - Mentor: {student.mentor}
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>
@@ -184,7 +181,7 @@ function Enroll({ data }) {
           </div>
           {/* End of Search Bar */}
         </div>
-        <div className=" ml-4 px-2 mt-4  w-[25vw] ">
+        <div className=" ml-4 px-2 mt-4  w-[25vw] font-Damion-cursive ">
           <label className="text-white">Select Date&nbsp;:&nbsp;</label>
           <input
             type="date"
@@ -197,56 +194,62 @@ function Enroll({ data }) {
         <div className="mt-4 ml-4">
           <button
             id="classButton"
-            className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800`}
+            className={`relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-Damion-cursive text-white rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800`}
             type="submit"
             onClick={openModal}
           >
-            <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            <span className="relative px-20 py-2.5 transition-all ease-in duration-75 bg-black dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
               Submit
             </span>
           </button>
           {isModalVisible && (
-        <Modal onClose={closeModal}>
-          <div className="p-6 text-center">
-            <svg
-              className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            ></svg>
-            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to assign this mentor to Selected Students?
-            </h3>
-            <button
-            onClick={handleSubmit} // Call handleSubmit when "Yes, I'm sure" is clicked
-              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-            >
-              Yes, I'm sure
-            </button>
-            <button
-              onClick={closeModal} // Close the modal when "No, cancel" is clicked
-              className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-            >
-              No, cancel
-            </button>
-          </div>
-        </Modal>
-      )}
-      <button
-        onClick={() => {
-          // Your button click handler here
-          router.push("/registration");
-        }}
-        className="fixed bottom-2 right-5"
-      >
-        <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Go Back
-          </span>
-        </span>
-      </button>
-
+            <>
+              <div
+                className=" fixed top-0 left-0 z-10 w-full h-full bg-black opacity-70 transition-opacity duration-300 ease-in-out"
+                onClick={closeModal} // Close the sidebar when overlay is clicked
+              ></div>
+              <Modal onClose={closeModal}>
+                <div className="p-6 text-center">
+                  <svg
+                    className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  ></svg>
+                  <h3 className="mb-5 text-lg font-normal text-gray-900 dark:text-gray-400">
+                    Are you sure you want to Renroll this 
+                    Student?
+                  </h3>
+                  <button
+                    onClick={handleSubmit} // Call handleSubmit when "Yes, I'm sure" is clicked
+                    className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-Damion-cursive rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                  >
+                    Yes, I'm sure
+                  </button>
+                  <button
+                    onClick={closeModal} // Close the modal when "No, cancel" is clicked
+                    className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-Damion-cursive px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                  >
+                    No, cancel
+                  </button>
+                </div>
+              </Modal>
+            </>
+          )}
+          <button
+            onClick={() => {
+              // Your button click handler here
+              router.push("/registration");
+            }}
+            className="fixed bottom-2 right-5"
+          >
+            <span className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-Damion-cursive text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+              <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-black dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Go Back
+              </span>
+            </span>
+          </button>
         </div>
       </form>
 
