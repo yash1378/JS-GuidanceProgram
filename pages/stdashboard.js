@@ -66,6 +66,8 @@ function DataPage({ data, d }) {
       });
     }
     console.log(filteredData);
+  // Sort the filtered data by date in descending order (latest to oldest)
+
     setFinal(filteredData);
 
     console.log("Effect Triggered");
@@ -96,6 +98,7 @@ function DataPage({ data, d }) {
       appliedFilters.push("Enrolled Within Last 30 Days");
     }
 
+    filteredData = filteredData.reverse();
     setActiveFilters(appliedFilters);
 
     const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value

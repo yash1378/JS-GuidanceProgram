@@ -369,7 +369,7 @@ function Registration({ data, d }) {
                 htmlFor="paymentDate"
                 className="block mb-2 text-base font-Damion-cursive text-white dark:text-white"
               >
-                Date of Mentor Assigned
+                Date of Payment
               </label>
               <input
                 type="date"

@@ -7,10 +7,10 @@ import { useRouter } from "next/router";
 // Define your API endpoint
 // Replace with your actual API endpoint
 
-function Enroll({ data }) {
+function Enroll({ data, d }) {
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [studentData, setStudentData] = useState(data);
   const [selectedMentor, setSelectedMentor] = useState(""); // State to track selected mentor
   const [message, setMessage] = useState("");
@@ -28,7 +28,7 @@ function Enroll({ data }) {
   useEffect(() => {
     // Fetch data from the API and set it to studentData
     // ...
-  }, [data]);
+  }, [data, d]);
 
   // Function to open the modal
   const openModal = (e) => {
@@ -42,6 +42,7 @@ function Enroll({ data }) {
     setIsModalVisible(false);
   };
 
+  
   const handleSearchChange = (e) => {
     const value = e.target.value;
     const filteredNames = studentData.filter(
@@ -62,9 +63,23 @@ function Enroll({ data }) {
     setEmail(student.email);
     setClasss(student.class);
     setSub(student.sub);
-    setDate(student.date);
+    // setDate(student.date);
+    // Find the date for the selected student from d
+    const studentWithDate = d.find((s) => s.phone === student.phone);
 
-    // setSuggestions([]); // Clear suggestions
+    if (studentWithDate) {
+      // If the student is found in the 'd' data, set the date
+      const originalDate = new Date(studentWithDate.date);
+      const newDate = new Date(
+        originalDate.getTime() + 30 * 24 * 60 * 60 * 1000
+      ); // Add 30 days (in milliseconds)
+      setSelectedDate(newDate.toISOString().split("T")[0]); // Format as 'yyyy-MM-dd'
+    } else {
+      // Handle the case where the date is not found
+      setSelectedDate(""); // You can set a default value or handle it as needed
+      console.error("Date not found for the selected student.");
+    }
+    setSuggestions([]); // Clear suggestions
   };
 
   const handleSubmit = async (e) => {
@@ -74,24 +89,21 @@ function Enroll({ data }) {
     try {
       // Send data to the backend API
 
-      const response = await fetch(
-        "https://gp-backend-u5ty.onrender.com/renrollment/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            studentName: searchText,
-            mentorName: selectedMentor,
-            date: selectedDate,
-            phone: phone,
-            email: email,
-            classs: classs,
-            sub: sub,
-          }),
-        }
-      );
+      const response = await fetch("https://gp-backend-u5ty.onrender.com/renrollment/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          studentName: searchText,
+          mentorName: selectedMentor,
+          date: selectedDate,
+          phone: phone,
+          email: email,
+          classs: classs,
+          sub: sub,
+        }),
+      });
       console.log(response);
 
       if (response.ok) {
@@ -218,8 +230,7 @@ function Enroll({ data }) {
                     viewBox="0 0 20 20"
                   ></svg>
                   <h3 className="mb-5 text-lg font-normal text-gray-900 dark:text-gray-400">
-                    Are you sure you want to Renroll this 
-                    Student?
+                    Are you sure you want to Renroll this Student?
                   </h3>
                   <button
                     onClick={handleSubmit} // Call handleSubmit when "Yes, I'm sure" is clicked
@@ -269,16 +280,18 @@ function Enroll({ data }) {
 export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
-    const response = await fetch(
-      "https://gp-backend-u5ty.onrender.com/api/data/"
-    );
+    const response = await fetch("https://gp-backend-u5ty.onrender.com/api/data/");
     const data = await response.json();
 
+    const r = await fetch("https://gp-backend-u5ty.onrender.com/api/renrollData/");
+
+    const d = await r.json();
     console.log(data);
 
     return {
       props: {
         data,
+        d,
       },
     };
   } catch (error) {
@@ -286,6 +299,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         data: [],
+        d: [],
       },
     };
   }
