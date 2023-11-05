@@ -28,12 +28,20 @@ const DataPage = ({
   };
 
   // Function to toggle selection for a specific row
-  const toggleSelect = (id) => {
-    if (selectedRows.includes(id)) {
-      setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
-    } else {
-      setSelectedRows([...selectedRows, id]);
-    }
+  // const toggleSelect = (id) => {
+  //   if (selectedRows.includes(id)) {
+  //     setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
+  //   } else {
+  //     setSelectedRows([...selectedRows, id]);
+  //   }
+  // };
+  // Function to toggle selection for a specific row
+  const toggleSelect = async(id) => {
+    console.log(id);
+    setSelectedRows(id);
+    setSelectedStudentIds(id); // Assuming id represents student ID
+
+    console.log(selectedRows);
   };
 
   // Handle mentor selection
@@ -55,6 +63,8 @@ const DataPage = ({
       // openModal();
       return;
     }
+
+    console.log(selectedStudentIds)
 
     try {
       // Send an API request to update mentor and students

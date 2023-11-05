@@ -7,7 +7,7 @@ import Modal from "@/components/Modal";
 
 function Registration({ data }) {
   const [selectedMentor, setSelectedMentor] = useState("");
-  const [selectedStudentCount, setSelectedStudentCount] = useState("");
+  const [selectedStudentCount, setSelectedStudentCount] = useState(0);
   const [mentors, setMentors] = useState([]); // Store mentor names fetched from the backend API
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
