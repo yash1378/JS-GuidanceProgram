@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 6500",
-    "postbuild": "next-on-netlify",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
