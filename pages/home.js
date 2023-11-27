@@ -99,9 +99,10 @@ function Home({ data }) {
           </Link>
         </div>
       </main>
-
+      {/* Footer content */}
       <footer className={styles.footer}>
-        <p>Footer content here</p>
+        <p>&copy; 2023 JEE Simplified. All rights reserved.</p>
+        <p>Terms of Service | Privacy Policy</p>
       </footer>
     </div>
   );
