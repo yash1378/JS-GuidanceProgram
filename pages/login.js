@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import Toast from "@/components/Toast";
 import { useRouter } from "next/router";
@@ -14,22 +12,24 @@ const LoginPage = () => {
   const [color, setColor] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [message, setMessage] = useState("");
-  const [td, setTd] = useState([]); // State to store owner data
+  const [td, setTd] = useState(); // State to store owner data
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchOwnerData = async () => {
-      try {
-        const response = await fetch("https://gp-backend-u5ty.onrender.com/ownerData/");
-        const data = await response.json();
-        setTd(data);
-      } catch (error) {
-        console.error("Error fetching owner data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchOwnerData = async () => {
+  //     try {
+  //       const response = await fetch("https://gp-backend-u5ty.onrender.com/ownerData/");
+  //       const data = await response.json();
+  //       // console.log(data);
+  //       setTd(data[0]._id);
+  //       console.log(td);
+  //     } catch (error) {
+  //       console.error("Error fetching owner data:", error);
+  //     }
+  //   };
 
-    fetchOwnerData(); // Fetch owner data on component mount
-  }, []); // Empty dependency array to ensure it runs only once on mount
+  //   fetchOwnerData(); // Fetch owner data on component mount
+  // }, []); // Empty dependency array to ensure it runs only once on mount
 
   const toast = () => {
     setShowToast(true);
@@ -49,19 +49,20 @@ const LoginPage = () => {
         },
         body: JSON.stringify(formData),
       });
-
+      setFormData({ email: "", password: "" });
 
       if (response.ok) {
         const data = await response.json();
-        let it = td.filter((item) => item.ownername === data.name);
-        document.cookie = `id=${it[0]._id}; max-age=3600; path=/`;
+        // console.log(data.id);
+        // let it = td.filter((item) => item._id === data.id);
+        // // console.log(it)
+        document.cookie = `id=${data.id}; max-age=3600; path=/`;
         router.push("/home");
       } else {
         setMessage("Password or email is incorrect !");
         setColor("red");
         toast();
       }
-      setFormData({ email: "", password: "" });
     } catch (error) {
       console.error("An error occurred", error);
     }
