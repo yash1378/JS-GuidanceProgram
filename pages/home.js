@@ -7,6 +7,7 @@ import styles from "../styles/Home.module.css";
 import { FaBars } from "react-icons/fa";
 
 function Home({ data }) {
+  console.log(data)
   const [isAuthorized, setIsAuthorized] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   // The text to simulate typing
@@ -19,7 +20,7 @@ function Home({ data }) {
 
   useEffect(() => {
     const usernameCookie = Cookies.get("id");
-    let isMatch = data.filter((it) => usernameCookie === it._id);
+    let isMatch = data.filter((it) => usernameCookie === data[0]._id);
     setIsAuthorized(isMatch);
     if (isMatch.length === 0) {
       setIsAuthorized(false);
@@ -35,17 +36,17 @@ function Home({ data }) {
     }
   }, [data , textIndex, typingText]);
 
-  const toggleSidebar = () => {
-    const sidebar = document.getElementById("drawer-navigation");
-    sidebar.classList.toggle("-translate-x-full");
-    setIsSidebarOpen(!isSidebarOpen);
+  // const toggleSidebar = () => {
+  //   const sidebar = document.getElementById("drawer-navigation");
+  //   sidebar.classList.toggle("-translate-x-full");
+  //   setIsSidebarOpen(!isSidebarOpen);
 
-  };
+  // };
 
-  const closeSidebar = () => {
-    const sidebar = document.getElementById("drawer-navigation");
-    sidebar.classList.add("-translate-x-full");
-  };
+  // const closeSidebar = () => {
+  //   const sidebar = document.getElementById("drawer-navigation");
+  //   sidebar.classList.add("-translate-x-full");
+  // };
 
   if (!isAuthorized) {
     return (

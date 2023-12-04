@@ -142,7 +142,10 @@ function formatDate(dateString) {
 export async function getServerSideProps() {
   // Fetch the initial todos from the backend
   try {
+    // const r= await fetch("http://localhost:8000/api/ownerData");
+    // console.log(r)
     const response = await fetch("http://localhost:8000/app/");
+
     if (response.ok) {
       const initialTodos = await response.json();
       console.log(initialTodos)

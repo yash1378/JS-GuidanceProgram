@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
-const port = 4000;
+const port = 5000;
+const http = require('http');
+const socketIO = require('socket.io');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const cors = require("cors");
+const server = http.createServer(app);
+const io = socketIO(server);
 require("dotenv").config();
 
 require("./db/conn");
@@ -34,6 +39,13 @@ mongoose
 
 // Access the logs collection
 const logCollection = mongoose.connection.collection("logs");
+const socketProxy = createProxyMiddleware('/socket.io', {
+  target: 'http://localhost:5000', // Change this to your Socket.IO server URL
+  ws: true,
+  changeOrigin: true,
+});
+
+app.use(socketProxy);
 // Use the cors middleware
 app.use(cors());
 // app.use(express.urlencoded(extended:true))
@@ -73,6 +85,22 @@ app.use((req, res, next) => {
   next(); // Continue processing the request
 });
 
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  socket.on('login', (credentials) => {
+    // Your existing login logic here
+    console.log(credentials)
+    // ...
+
+    // Send the validation result to the client
+    socket.emit('loginResult',"logged in successfully");
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
 // ... (the rest of your code)
 
 // Define a route for the root URL
@@ -185,6 +213,7 @@ app.get("/ownerData", async (req, res) => {
 
     // Find data in the User model based on query parameters
     const data = await Own.find(conditions).select(fieldsToRetrieve);
+
 
     res.json(data);
   } catch (error) {
@@ -442,6 +471,7 @@ app.post("/api/finalMentor", async (req, res) => {
   }
 });
 
+
 // -->Done
 app.post("/login", async (req, res) => {
   try {
@@ -450,39 +480,6 @@ app.post("/login", async (req, res) => {
     // 1. check if CredModel exists
     // const CredModel = await credModel.findOne({ email });
     const OwnModel = await Own.findOne({ email });
-    // if (CredModel) {
-    //   console.log(CredModel);
-    //   console.log(CredModel.mentorname);
-    // }
-
-    // if CredModel doesn't exist, return error
-    // if (!CredModel && !OwnModel) {
-    //   console.log("CredModel does not exist");
-    //   return;
-    // } 
-    // if (!OwnModel) {
-    //   // 2. if CredModel exists, check if password is correct
-    //   console.log(CredModel);
-    //   // const hash = await hash(CredModel.password, 10);
-    //   console.log(hash);
-    //   const isMatch = await compare(password, CredModel.password);
-
-    //   // if password is incorrect, return error
-    //   if (!isMatch) {
-    //     console.log("password is incorrect...");
-    //     // Incorrect password, return a 401 Unauthorized response
-    //     return res.status(401).json({ error: "Incorrect password" });
-    //   }
-    //   // await CredModel.save();
-
-    //   // res.cookie('username', CredModel.mentorname, { maxAge: 3600000,path:'/' }); // 'username' cookie with a 1-hour (3600000 ms) expiration
-
-    //   res.status(200).json({
-    //     message: "Logged in successfully! 🥳",
-    //     name: CredModel.mentorname,
-    //     type: "mentor",
-    //   });
-    // } else {
       // 2. if CredModel exists, check if password is correct
       console.log(password);
       console.log(OwnModel.password);
@@ -514,6 +511,8 @@ app.post("/login", async (req, res) => {
     });
   }
 });
+
+
 
 // -->Left
 const transporter = nodemailer.createTransport({
