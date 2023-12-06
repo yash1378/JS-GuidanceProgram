@@ -7,7 +7,7 @@ import styles from "../styles/Home.module.css";
 import { FaBars } from "react-icons/fa";
 
 function Home({ data }) {
-  console.log(data)
+  // console.log(data)
   const [isAuthorized, setIsAuthorized] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   // The text to simulate typing

@@ -1,39 +1,39 @@
-// pages/LoginPage.js
-
-import { useState } from "react";
-import io from "socket.io-client";
+import React, { useEffect, useState } from "react";
 import Toast from "@/components/Toast";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import "../styles/Home.module.css";
 
-const LoginPage = ({ td }) => {
+const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [initialTodos, setInitialTodos] = useState([]);
+  const [mpp, setMpp] = useState(new Map());
+
+  useEffect(() => {
+    async function handleRouteChange() {
+      const response = await fetch(
+        "https://gp-backend-u5ty.onrender.com/api/ownerData/"
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setInitialTodos(data);
+        mpp.set(data[0].email, 1);
+        mpp.set(data[0].password, 1);
+        setFoundUser(data[0]._id);
+        setMpp(mpp); // update the state
+      }
+    }
+    handleRouteChange();
+  }, []);
+  const [foundUser, setFoundUser] = useState();
+  // console.log(initialTodos[0]._id);
   const [color, setColor] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [message, setMessage] = useState("");
   const router = useRouter();
-
-  // Establish a socket.io connection
-  const socket = io("http://localhost:5000/");
-
-  // Handle login response from the server
-  socket.on('loginResult', (result) => {
-    console.log(result)
-    if (result.isValid) {
-      alert('Login successful!');
-      // Perform any additional actions after successful login
-      // For example, redirecting to another page
-      router.push("/home");
-    } else {
-      setMessage("Password or email is incorrect !");
-      setColor("red");
-      toast();
-    }
-  });
 
   const toast = async () => {
     setShowToast(true);
@@ -44,9 +44,19 @@ const LoginPage = ({ td }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("clicked");
+    // console.log(formData);
+    // console.log(mpp.get(formData.email));
 
-    // Emit the login event with credentials to the server
-    socket.emit('login', formData);
+    if (mpp.get(formData.email) === 1 && mpp.get(formData.password) === 1) {
+      document.cookie = `id=${initialTodos[0]._id}; max-age=3600; path=/; SameSite=None; Secure`;
+      router.push("/home");
+    } else {
+      setMessage("Password or email is incorrect !");
+      setColor("red");
+      toast();
+    }
+    console.log("executed");
   };
 
   const handleInputChange = (e) => {
@@ -60,7 +70,7 @@ const LoginPage = ({ td }) => {
         <div className="w-[70vw] h-[80vh] flex">
           <div className="bg-white shadow-4xl rounded px-8 pt-6 pb-8 mb-4  border-2 rounded-3xl  w-[30vw] h-[80vh]">
             <h1 className="text-2xl font-bold mb-8 text-center">LOGIN</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
               {/* ... rest of your form code */}
               <div className="mb-4">
                 <label
@@ -137,23 +147,29 @@ const LoginPage = ({ td }) => {
                 )}
               </div>
             </form>
+            {/* <div> */}
+
+            {/* </div> */}
+            {/* </form> */}
           </div>
           <div className="w-[40vw] h-[70vh]">
-            <img
-              src="https://i.ibb.co/FBYscr3/profile.jpg"
-              style={{
-                maxWidth: "100%",
-                height: "79.8vh",
-                borderRadius: "20px",
-              }}
-              alt="profile"
-              border="0"
-            />
-          </div>
+              <img
+                src="https://i.ibb.co/FBYscr3/profile.jpg"
+                style={{
+                  maxWidth: "100%",
+                  height: "79.8vh",
+                  borderRadius: "20px",
+                }}
+                alt="profile"
+                border="0"
+              />
+            </div>
         </div>
       </div>
     </>
   );
 };
+
+
 
 export default LoginPage;
