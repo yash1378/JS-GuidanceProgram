@@ -45,8 +45,6 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("clicked");
-    // console.log(formData);
-    // console.log(mpp.get(formData.email));
 
     if (mpp.get(formData.email) === 1 && mpp.get(formData.password) === 1) {
       document.cookie = `id=${initialTodos[0]._id}; max-age=3600; path=/; SameSite=None; Secure`;

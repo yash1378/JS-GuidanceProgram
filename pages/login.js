@@ -20,10 +20,7 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         setInitialTodos(data);
-        mpp.set(data[0].email, 1);
-        mpp.set(data[0].password, 1);
         setFoundUser(data[0]._id);
-        setMpp(mpp); // update the state
       }
     }
     handleRouteChange();
@@ -45,7 +42,13 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("clicked");
-
+  
+    const mpp = new Map();
+    mpp.set(initialTodos[0]?.email, 1);
+    mpp.set(initialTodos[0]?.password, 1);
+  
+    // console.log(mpp);
+  
     if (mpp.get(formData.email) === 1 && mpp.get(formData.password) === 1) {
       document.cookie = `id=${initialTodos[0]._id}; max-age=3600; path=/; SameSite=None; Secure`;
       router.push("/home");
