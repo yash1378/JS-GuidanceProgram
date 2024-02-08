@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Snackbar from "@mui/material/Snackbar";
 import Grow from "@mui/material/Grow";
 import MuiAlert from "@mui/material/Alert";
-import StarFallAnimation from "../components/star"; // Import the StarFallAnimation component
 const HomePage = () => {
   const router = useRouter();
   const [isHovered,setIsHovered] = useState(false);
@@ -61,7 +60,6 @@ const HomePage = () => {
         `}
         </style>
       </Head>
-      <StarFallAnimation />
       <div
         style={{
           textAlign: "center",
