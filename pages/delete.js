@@ -4,7 +4,7 @@ import Modal from "@/components/Modal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
-function ParentComponent({ data, t }) {
+function ParentComponent({ data}) {
   // console.log(t);
   const [selectedIds, setSelectedIds] = useState([]);
   // const [selectedMentors, setSelectedMentors] = useState([]);
@@ -15,7 +15,7 @@ function ParentComponent({ data, t }) {
   // State variable to manage modal visibility
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const [isAuthorized, setIsAuthorized] = useState(true);
+
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedDate, setSelectedDate] = useState();
@@ -125,42 +125,6 @@ function ParentComponent({ data, t }) {
       setMessage("An error occurred while Deleteing rows.");
     }
   };
-  useEffect(() => {
-    // setDat(data);
-    // Check if selectedIds is not empty and then clear it
-    const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
-    // let isMatch ;
-    // console.log(isMatch);
-    let isMatch = t.filter((it) => usernameCookie === it._id);
-    // console.log(usernameCookie);
-    // console.log(t[0]._id);
-    // setMessage("");
-    setIsAuthorized(isMatch);
-    if (isMatch.length === 0) {
-      setIsAuthorized(false);
-    }
-  }, [data]);
-
-  if (!isAuthorized) {
-    // If the username in the cookie doesn't match the mentor name, you can redirect the user
-    // router.push(`/${ment}`); // Replace "/unauthorized" with the appropriate URL for unauthorized access
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <Head>
-          <title>Access Denied</title>
-        </Head>
-        <div className="text-center">
-          <h1 className="text-4xl font-Damion-cursive text-gray-800 mb-4">
-            You're not allowed to access this page
-          </h1>
-          <p className="text-lg text-gray-600">
-            Please contact the administrator for assistance.
-          </p>
-        </div>
-      </div>
-    ); // Return null to prevent rendering this component
-  }
-
   return (
     <div>
       <Head>
@@ -358,16 +322,11 @@ export async function getServerSideProps() {
     ); // Replace with your API URL
     const data = await response1.json();
 
-    const r = await fetch(
-      "https://gp-backend-u5ty.onrender.com/api/ownerData/"
-    );
-    const t = await r.json();
     // console.log(t);
 
     return {
       props: {
         data,
-        t,
       },
     };
   } catch (error) {
@@ -375,7 +334,6 @@ export async function getServerSideProps() {
     return {
       props: {
         data: [],
-        t: [],
       },
     };
   }

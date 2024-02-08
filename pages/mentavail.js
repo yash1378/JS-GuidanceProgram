@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Modal from "@/components/Modal";
 
-function Registration({ data }) {
+const Registration = () => {
   const [selectedMentor, setSelectedMentor] = useState("");
   const [selectedStudentCount, setSelectedStudentCount] = useState(0);
   const [mentors, setMentors] = useState([]); // Store mentor names fetched from the backend API
@@ -14,8 +14,6 @@ function Registration({ data }) {
   const [showToast, setShowToast] = useState(false);
   const router = useRouter();
 
-  const [isAuthorized, setIsAuthorized] = useState(true);
-  let final = data;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -32,42 +30,16 @@ function Registration({ data }) {
   };
 
   useEffect(() => {
-    const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
-    // let isMatch ;
-    // console.log(isMatch);
-    let isMatch = data.filter((it) => usernameCookie === it._id);
-    setIsAuthorized(isMatch);
-    if (isMatch.length === 0) {
-      setIsAuthorized(false);
-    }
     fetchMentors();
   }, []);
-
-  if (!isAuthorized) {
-    // If the username in the cookie doesn't match the mentor name, you can redirect the user
-    // router.push(`/${ment}`); // Replace "/unauthorized" with the appropriate URL for unauthorized access
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <Head>
-          <title>Access Denied</title>
-        </Head>
-        <div className="text-center">
-          <h1 className="text-4xl font-semibold text-gray-800 mb-4">
-            You're not allowed to access this page
-          </h1>
-          <p className="text-lg text-gray-600">
-            Please contact the administrator for assistance.
-          </p>
-        </div>
-      </div>
-    ); // Return null to prevent rendering this component
-  }
 
   const fetchMentors = async () => {
     try {
       // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint to fetch mentors
+
       const response = await fetch(
         "https://gp-backend-u5ty.onrender.com/api/mentorData"
+        // "http://localhost:5000/api/mentorData"
       );
       if (response.ok) {
         // console.log(response.json());
@@ -76,7 +48,7 @@ function Registration({ data }) {
         const mentorNames = Object.values(data).map((mentor) => mentor.name);
         console.log(mentorNames);
 
-        // console.log(data);
+        console.log(data);
         setMentors(mentorNames); // Assuming data is an array of mentor names
       } else {
         console.error("Failed to fetch mentors.");
@@ -101,6 +73,7 @@ function Registration({ data }) {
     try {
       const response = await fetch(
         "https://gp-backend-u5ty.onrender.com/api/update",
+        // "http://localhost:5000/api/update",
         {
           method: "POST",
           headers: {
@@ -277,25 +250,6 @@ function Registration({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  try {
-    const response = await fetch(
-      "https://gp-backend-u5ty.onrender.com/api/ownerData/"
-    );
-    const data = await response.json();
-    return {
-      props: {
-        data,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        data: [],
-      },
-    };
-  }
-}
+
 
 export default Registration;

@@ -4,7 +4,7 @@ import Modal from "@/components/Modal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
-function ParentComponent({ data, t }) {
+function ParentComponent({ data}) {
   const [selectedPhoneNumbers, setSelectedPhoneNumbers] = useState([]);
   const [selectedMentorNames, setSelectedMentorNames] = useState([]);
 
@@ -12,7 +12,6 @@ function ParentComponent({ data, t }) {
   const [dat, setDat] = useState(data);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const [isAuthorized, setIsAuthorized] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [studentData, setStudentData] = useState(data);
@@ -67,7 +66,7 @@ function ParentComponent({ data, t }) {
 
   const handleDeleteClick = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/delete/", {
+      const response = await fetch("https://gp-backend-u5ty.onrender.com/api/delete/", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +79,7 @@ function ParentComponent({ data, t }) {
       console.log(response);
       if (response.ok) {
         setMessage("Selected rows have been Deleted successfully.");
-        const response1 = await fetch("http://localhost:8000/api/data/");
+        const response1 = await fetch("https://gp-backend-u5ty.onrender.com/api/data/");
         const updatedData = await response1.json();
         if (updatedData) {
           setDat(updatedData);
@@ -96,33 +95,6 @@ function ParentComponent({ data, t }) {
       setMessage("An error occurred while Deleting rows.");
     }
   };
-
-  useEffect(() => {
-    // const usernameCookie = Cookies.get("id");
-    // let isMatch = t.filter((it) => usernameCookie === it._id);
-    // setIsAuthorized(isMatch);
-    // if (isMatch.length === 0) {
-    //   setIsAuthorized(false);
-    // }
-  }, [data]);
-
-  // if (!isAuthorized) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-  //       <Head>
-  //         <title>Access Denied</title>
-  //       </Head>
-  //       <div className="text-center">
-  //         <h1 className="text-4xl font-Damion-cursive text-gray-800 mb-4">
-  //           You're not allowed to access this page
-  //         </h1>
-  //         <p className="text-lg text-gray-600">
-  //           Please contact the administrator for assistance.
-  //         </p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div>
@@ -313,20 +285,15 @@ export async function getServerSideProps() {
   try {
     // Fetch data from your API routes (backend)
     const response1 = await fetch(
-      "http://localhost:8000/api/data/"
+      "https://gp-backend-u5ty.onrender.com/api/data/"
     ); // Replace with your API URL
     const data = await response1.json();
 
-    const r = await fetch(
-      "http://localhost:8000/api/ownerData/"
-    );
-    const t = await r.json();
     // console.log(t);
 
     return {
       props: {
         data,
-        t,
       },
     };
   } catch (error) {
@@ -334,7 +301,6 @@ export async function getServerSideProps() {
     return {
       props: {
         data: [],
-        t: [],
       },
     };
   }

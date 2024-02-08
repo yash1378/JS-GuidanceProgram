@@ -59,7 +59,7 @@ const DataPage = ({
     //   Send an API request to update mentor and students
 
       const response = await fetch(
-        "http://localhost:8000/api/finalMentor",
+        "https://gp-backend-u5ty.onrender.com/api/finalMentor",
         {
           method: "POST",
           headers: {
@@ -82,7 +82,7 @@ const DataPage = ({
 
         // Fetch the latest data from the server
         const response1 = await fetch(
-          "http://localhost:8000/api/data"
+          "https://gp-backend-u5ty.onrender.com/api/data"
         );
         const updatedData = await response1.json();
         console.log(updatedData);

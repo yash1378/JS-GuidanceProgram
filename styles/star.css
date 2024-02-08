@@ -1,0 +1,16 @@
+/* components/StarFallAnimation.css */
+.star {
+    position: fixed;
+    top: -10px;
+    width: 2px;
+    height: 2px;
+    background-color: white;
+    animation: fall linear infinite;
+  }
+  
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+    }
+  }
+  

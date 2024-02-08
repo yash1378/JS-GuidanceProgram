@@ -1,32 +1,158 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-
+import { useState,useEffect } from "react";
+import Typography from "@mui/material/Typography";
+import Snackbar from "@mui/material/Snackbar";
+import Grow from "@mui/material/Grow";
+import MuiAlert from "@mui/material/Alert";
+import StarFallAnimation from "../components/star"; // Import the StarFallAnimation component
 const HomePage = () => {
   const router = useRouter();
-
-
-  const goToLogIn = () => {
+  const [isHovered,setIsHovered] = useState(false);
+  const [showSecondaryText, setShowSecondaryText] = useState(false);
+  const [openlogin, setOpenlogin] = useState(true);
+  const [open, setOpen] = useState(false);
+  const handleSignIn = () => {
     router.push("/login");
   };
 
+  useEffect(() => {
+    if(openlogin){
+      setTimeout(() => {
+        setOpenlogin(false);
+      }, 3000);
+    }
+  }, []);
+
+  const buttonStyle = {
+    width: "300px", 
+    padding: "20px 2rem",
+    margin:"10px",
+    border: "1px solid #CBD5E0",
+    display: "flex",
+    gap: "2rem",
+    borderRadius: "0.5rem",
+    color: "white",
+    background: "#334244",
+    cursor: "pointer",
+    transition: "all 0.5s ease",
+  };
+
+  const hoverStyle = {
+    border: "1px solid #CBD5E0",
+    color: "white",
+    background: "transparent",
+    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1)",
+  };
 
 
   return (
-    <div className="min-h-screen flex flex-col items-center font-Damion-cursive justify-center bg-gradient-to-r from-white-500 via-blue-600 to-blue-700 text-white">
+    <>
       <Head>
-        <title>Home</title>
+        <style>
+          {`
+          body {
+            background-image: url('/bg.png');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+          }
+        `}
+        </style>
       </Head>
-      <div className="text-center">
-        <h1 className="text-[50px]  text-black font-extrabold mb-6">Welcome to Your App</h1>
-        <div className="space-y-4 text-[60px]">
-          <button onClick={goToLogIn} className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-Damion-cursive text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              Log In
-            </span>
-          </button>
-        </div>
+      <StarFallAnimation />
+      <div
+        style={{
+          textAlign: "center",
+          padding: "20px",
+          // backgroundColor:"transparent",
+          backgroundImage: "url('/bg.png')",
+          // border:"2px solid red",
+          width:"90vw",
+          marginTop:"5vh",
+          boxShadow: "0 5px 30px rgba(0, 0, 0, 1.3)",
+          borderRadius: "20px",
+          height: "90vh",
+        }}
+      >
+          <div style={{height:'85vh',display:'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <Typography
+              style={{
+                fontFamily: "'Graphik', sans-serif",
+                color: "white",
+                marginTop: "10vh",
+              }}
+              variant="h1"
+              gutterBottom
+              color="white"
+              fontWeight="bold"
+            >
+               Welcome to Your App
+            </Typography>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    gap: "1rem",
+                  }}
+                >
+                  {showSecondaryText && (
+                    <Typewriter
+                      words={[
+                        "We ",
+                        "make ",
+                        "IIT ",
+                        "JEE ",
+                        "PREP ",
+                        "EASIER ",
+                        "FOR ",
+                        "YOU ",
+                      ]}
+                      speed={40}
+                    />
+                  )}
+                  <br/>
+
+                  <button
+                    onClick={handleSignIn}
+                    style={
+                      isHovered
+                        ? { ...buttonStyle, ...hoverStyle }
+                        : buttonStyle
+                    }
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                  >
+                    <img
+                      style={{ width: "2.5rem", height: "2.5rem" }}
+                      src="https://www.svgrepo.com/show/227633/login.svg"
+                      loading="lazy"
+                      alt="google logo"
+                    />
+                    <span style={{ fontSize: "20px", marginTop: "6px" }}>
+                      Login in With
+                    </span>
+                  </button>
+                </div>
+                  <Snackbar
+                  open={openlogin}
+                  TransitionComponent={Grow}
+                  autoHideDuration={6000}
+                  onClose={() => setOpen(false)}
+                >
+                  <MuiAlert severity="info" style={{ width: "100%" }}>
+                    Sign In using the button above
+                  </MuiAlert>
+                </Snackbar> 
+                </div>  
+
+            
+
       </div>
-    </div>
+    </>
   );
 };
 

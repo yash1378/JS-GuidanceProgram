@@ -14,7 +14,7 @@ const Toast = ({ message, onClose ,bgColor }) => {
 
   const toastStyle = {
     // color: textColor || 'white', // Set text color or default to white
-    backgroundColor: bgColor, // Set background color or default to green
+    backgroundColor: bgColor || 'transparent', // Set background color or default to green
   };
 
 

@@ -39,13 +39,13 @@ mongoose
 
 // Access the logs collection
 const logCollection = mongoose.connection.collection("logs");
-const socketProxy = createProxyMiddleware('/socket.io', {
-  target: 'http://localhost:5000', // Change this to your Socket.IO server URL
-  ws: true,
-  changeOrigin: true,
-});
+// const socketProxy = createProxyMiddleware('/socket.io', {
+//   target: 'http://localhost:5000', // Change this to your Socket.IO server URL
+//   ws: true,
+//   changeOrigin: true,
+// });
 
-app.use(socketProxy);
+// app.use(socketProxy);
 // Use the cors middleware
 app.use(cors());
 // app.use(express.urlencoded(extended:true))
@@ -85,22 +85,22 @@ app.use((req, res, next) => {
   next(); // Continue processing the request
 });
 
-io.on('connection', (socket) => {
-  console.log('A user connected');
+// io.on('connection', (socket) => {
+//   console.log('A user connected');
 
-  socket.on('login', (credentials) => {
-    // Your existing login logic here
-    console.log(credentials)
-    // ...
+//   socket.on('login', (credentials) => {
+//     // Your existing login logic here
+//     console.log(credentials)
+//     // ...
 
-    // Send the validation result to the client
-    socket.emit('loginResult',"logged in successfully");
-  });
+//     // Send the validation result to the client
+//     socket.emit('loginResult',"logged in successfully");
+//   });
 
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
-});
+//   socket.on('disconnect', () => {
+//     console.log('A user disconnected');
+//   });
+// });
 // ... (the rest of your code)
 
 // Define a route for the root URL
@@ -175,10 +175,12 @@ app.post("/", async (req, res) => {
 app.get("/api/mentorData", async (req, res) => {
   try {
     const conditions = req.query; // Query parameters for conditions
-    // console.log(req.query);
+    console.log(req.query);
 
     // Find data in the User model based on query parameters
     const data = await Mentor.find(conditions);
+    console.log(data)
+
 
     res.json(data);
   } catch (error) {

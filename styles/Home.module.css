@@ -1,3 +1,19 @@
+/* components/StarFallAnimation.css */
+.star {
+  position: fixed;
+  top: -10px;
+  width: 2px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.5); /* Use a semi-transparent white color */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Add a subtle glow effect */
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
 
 .container {
     min-height: 100vh;

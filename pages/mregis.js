@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Toast from "@/components/Toast";
-import Head from "next/head";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Modal from "@/components/Modal";
 

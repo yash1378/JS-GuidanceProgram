@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Cookies from "js-cookie";
 import { FaBars } from "react-icons/fa"; // Import the hamburger icon
-function DataPage({ data, d }) {
+function DataPage({ data }) {
   const [totalStudents, setTotalStudents] = useState(0);
   const [activeStudents, setActiveStudents] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to control sidebar visibility
@@ -14,7 +14,6 @@ function DataPage({ data, d }) {
   const [suggestions, setSuggestions] = useState([]);
   const [isSearchBoxEmpty, setIsSearchBoxEmpty] = useState(true);
 
-  const [isAuthorized, setIsAuthorized] = useState(true);
 
   const router = useRouter();
   let filteredData = data;
@@ -101,14 +100,6 @@ function DataPage({ data, d }) {
     filteredData = filteredData.reverse();
     setActiveFilters(appliedFilters);
 
-    const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
-    // let isMatch ;
-    // console.log(isMatch);
-    let isMatch = d.filter((it) => usernameCookie === it._id);
-    setIsAuthorized(isMatch);
-    if (isMatch.length === 0) {
-      setIsAuthorized(false);
-    }
   }, [router.query, searchText]); // Add router.query to the dependency array
 
   const toggleSidebar = () => {
@@ -121,32 +112,6 @@ function DataPage({ data, d }) {
 
   console.log(final);
 
-  if (!isAuthorized) {
-    // If the username in the cookie doesn't match the mentor name, you can redirect the user
-    // router.push(`/${ment}`); // Replace "/unauthorized" with the appropriate URL for unauthorized access
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <Head>
-          <title>Access Denied</title>
-          {/* <link href="https://fonts.googleapis.com/css2?family=Your+Font:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/> */}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@700&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
-        <div className="text-center">
-          <h1 className="text-4xl font-semibold text-gray-800 mb-4">
-            You're not allowed to access this page
-          </h1>
-          <p className="text-lg text-gray-600">
-            Please contact the administrator for assistance.
-          </p>
-        </div>
-      </div>
-    ); // Return null to prevent rendering this component
-  }
 
   return (
     <>
@@ -377,20 +342,15 @@ export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
     const response = await fetch(
-      "https://gp-backend-u5ty.onrender.com/api/data/"
+      // "https://gp-backend-u5ty.onrender.com/api/data/"
+      "http://localhost:5000/api/data/"
     );
     const data = await response.json();
-    const r = await fetch(
-      "https://gp-backend-u5ty.onrender.com/api/ownerData/"
-    );
-    const d = await r.json();
 
-    console.log(d);
 
     return {
       props: {
         data,
-        d,
       },
     };
   } catch (error) {
@@ -398,7 +358,6 @@ export async function getServerSideProps(context) {
     return {
       props: {
         data: [],
-        d: [],
       },
     };
   }

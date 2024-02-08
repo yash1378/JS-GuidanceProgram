@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import Modal from "@/components/Modal";
 import { FaBars } from "react-icons/fa";
 
-function Registration({ data, d }) {
+function Registration({ data}) {
   const [studentName, setStudentName] = useState("");
   const router = useRouter();
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -24,12 +24,9 @@ function Registration({ data, d }) {
   const [reenrollmentDropdownOpen, setReenrollmentDropdownOpen] =
     useState(false);
   // Add state variable for toast visibility
-  const [showToast, setshowToast] = useState(false);
-  const [isAuthorized, setIsAuthorized] = useState(true);
+  const [showToast, setshowToast] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  let final = d;
-  console.log(d);
 
   // Function to open the modal
   const openModal = (e) => {
@@ -54,37 +51,8 @@ function Registration({ data, d }) {
     sidebar.classList.add("-translate-x-full");
   };
 
-  useEffect(() => {
-    const usernameCookie = Cookies.get("id"); // Get the 'username' cookie value
-    // let isMatch ;
-    // console.log(isMatch);
-    let isMatch = d.filter((it) => usernameCookie === it._id);
-    setIsAuthorized(isMatch);
-    if (isMatch.length === 0) {
-      setIsAuthorized(false);
-    }
-  }, [final]);
 
-  if (!isAuthorized) {
-    // If the username in the cookie doesn't match the mentor name, you can redirect the user
-    // router.push(`/${ment}`); // Replace "/unauthorized" with the appropriate URL for unauthorized access
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <Head>
-          <title>Access Denied</title>
-        </Head>
 
-        <div className="text-center">
-          <h1 className="text-4xl font-Damion-cursive text-gray-800 mb-4">
-            You're not allowed to access this page
-          </h1>
-          <p className="text-lg text-gray-600">
-            Please contact the administrator for assistance.
-          </p>
-        </div>
-      </div>
-    ); // Return null to prevent rendering this component
-  }
 
   const toast = async () => {
     setshowToast(true);
@@ -122,6 +90,7 @@ function Registration({ data, d }) {
     };
     try {
       const response = await fetch("https://gp-backend-u5ty.onrender.com/", {
+        // const response = await fetch("http://localhost:5000/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -232,9 +201,9 @@ function Registration({ data, d }) {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
             <span className="sr-only">Close menu</span>
@@ -657,17 +626,13 @@ export async function getServerSideProps(context) {
     // Fetch data from your backend API on the server side
     const response = await fetch(
       "https://gp-backend-u5ty.onrender.com/api/mentorData/"
+      // "http://localhost:5000/api/mentorData/"
     );
     const data = await response.json();
-    const r = await fetch(
-      "https://gp-backend-u5ty.onrender.com/api/ownerData/"
-    );
-    const d = await r.json();
 
     return {
       props: {
         data,
-        d,
       },
     };
   } catch (error) {
@@ -675,7 +640,6 @@ export async function getServerSideProps(context) {
     return {
       props: {
         data: [],
-        d: [],
       },
     };
   }
