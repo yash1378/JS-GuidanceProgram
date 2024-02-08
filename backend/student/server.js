@@ -6,7 +6,6 @@ const socketIO = require('socket.io');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const cors = require("cors");
 const server = http.createServer(app);
-const io = socketIO(server);
 require("dotenv").config();
 
 require("./db/conn");
