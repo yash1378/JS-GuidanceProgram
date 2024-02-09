@@ -342,8 +342,8 @@ export async function getServerSideProps(context) {
   try {
     // Fetch data from your backend API on the server side
     const response = await fetch(
-      // "https://gp-backend-u5ty.onrender.com/api/data/"
-      "http://localhost:5000/api/data/"
+      "https://gp-backend-u5ty.onrender.com/api/data/"
+      // "http://localhost:5000/api/data/"
     );
     const data = await response.json();
 

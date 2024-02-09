@@ -10,7 +10,7 @@ function Sidebar({ isOpen, closeSidebar }) {
   const [date, setDate] = useState(""); // Empty string for initial calendar value
   const [mentorData, setMentorData] = useState([]);
   const [selectedMentor, setSelectedMentor] = useState("");
-  const [enrol,setEnrol] = useState(false);
+  // const [enrol,setEnrol] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -71,8 +71,8 @@ function Sidebar({ isOpen, closeSidebar }) {
     // Fetch mentor data from the server when the component mounts
     const fetchMentorData = async () => {
       try {
-        // const response = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData");
-        const response = await fetch("http://localhost:5000/api/mentorData");
+        const response = await fetch("https://gp-backend-u5ty.onrender.com/api/mentorData");
+        // const response = await fetch("http://localhost:5000/api/mentorData");
         const data = await response.json();
         setMentorData(data);
       } catch (error) {
