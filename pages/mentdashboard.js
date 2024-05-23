@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-function DataPage({ data}) {
+function DataPage({ data }) {
   const router = useRouter();
   return (
     <>
-      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0 zIndex-2" >
+      <div className="flex flex-col items-center  bg-gray-700 w-screen min-h-screen  mt-0 zIndex-2">
         <h1 className=" text-white text-4xl font-'Roboto Slab' mt-3">
           <b>Mentor Data </b>
         </h1>
-        <div className="flex flex-col w-[80vw] h-[85vh]  mt-6 " >
+        <div className="flex flex-col w-[80vw] h-[85vh]  mt-6 ">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="shadow-2xl overflow-hidden sm:rounded-lg">
                 <table className="min-w-full text-sm text-white sm:table">
-                  <thead className="bg-gray-800 text-sm uppercase font-Damion-cursive"  style={{ position: "sticky", top: "0", zIndex: "2" }}>
+                  <thead
+                    className="bg-gray-800 text-sm uppercase font-Damion-cursive"
+                    style={{ position: "sticky", top: "0", zIndex: "2" }}
+                  >
                     <tr>
                       <th
                         scope="col"
@@ -37,7 +40,7 @@ function DataPage({ data}) {
                         scope="col"
                         className="px-6 py-3 text-left tracking-wider"
                       >
-                         No.of Ongoing Students
+                        No.of Ongoing Students
                       </th>
                       <th
                         scope="col"
@@ -66,7 +69,9 @@ function DataPage({ data}) {
                           <span className="sm:block">{item.on}</span>
                         </td>
                         <td className="px-6 py-2 sm:py-4 sm:px-2 whitespace-nowrap">
-                          <span className="sm:block">{item.handle - item.on}</span>
+                          <span className="sm:block">
+                            {item.handle - item.on}
+                          </span>
                         </td>
                       </tr>
                     ))}
@@ -75,8 +80,8 @@ function DataPage({ data}) {
               </div>
             </div>
           </div>
-          </div>
-          </div>
+        </div>
+      </div>
       <button
         onClick={() => {
           // Your button click handler here
@@ -99,7 +104,7 @@ export async function getServerSideProps(context) {
     // Fetch data from your backend API on the server side
     const response = await fetch(
       "https://gp-backend-u5ty.onrender.com/api/mentorData/"
-    //   "http://localhost:5000/api/mentorData/"
+      //   "http://localhost:5000/api/mentorData/"
     );
     const data = await response.json();
     return {

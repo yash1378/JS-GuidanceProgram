@@ -10,7 +10,7 @@ function Sidebar({ isOpen, closeSidebar }) {
   const [date, setDate] = useState(""); // Empty string for initial calendar value
   const [mentorData, setMentorData] = useState([]);
   const [selectedMentor, setSelectedMentor] = useState("");
-  // const [enrol,setEnrol] = useState(false);
+  const [enrol,setEnrol] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -114,7 +114,10 @@ function Sidebar({ isOpen, closeSidebar }) {
       </button>
 
       {/* Currently Enrolled Button */}
-      <button className="ml-0 mt-40 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-70 hover:bg-zinc-800" onClick={() => setEnrol(true)}>
+      <button className="ml-0 mt-40 mb-5 w-full px-3 py-5 mb-2 text-white bg-zinc-700 z-70 hover:bg-zinc-800" onClick={() => {
+        console.log(enrol)
+        setEnrol(true)}
+      }>
         Currently Enrolled
       </button>
 
